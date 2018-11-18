@@ -22,39 +22,39 @@ class Field extends Component {
       <Table className={classes.table} padding="dense">
         <TableBody>
           <TableRow key="1">
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="2" right="6" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
           </TableRow>
           <TableRow key="2">
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
           </TableRow>
           <TableRow key="3">
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
           </TableRow>
           <TableRow key="4">
-           <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
           </TableRow>
           <TableRow key="5">
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
-            <Cell classes={classes}>X</Cell>
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
+            <Cell classes={classes} below="8" right="14" />
           </TableRow>
         </TableBody>
       </Table>
