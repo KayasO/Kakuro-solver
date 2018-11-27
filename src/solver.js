@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import solutions from './solutions'
 
+let finished;
+
 function InfoCell(hSum, hCount, vSum, vCount) {
   this.hSum = hSum
   this.hCount = hCount
@@ -21,26 +23,44 @@ var field = [
   [new InfoCell(4, 2, 0, 0), new WhiteCell(), new WhiteCell(), null]
 ]
 
+function setEntriesForWhiteCells(infoCell, x, y) {
+  for (let i = 1; i <= infoCell.hCount; i++) {
+    field[x][y+i].horizontalEntries =
+      _.intersection(
+        field[x][y+i].horizontalEntries,
+        _.flatten(solutions[infoCell.hSum][infoCell.hCount])
+      )
+  }
+  for (let j = 1; j <= infoCell.vCount; j++) {
+    field[x+j][y].verticalEntries =
+      _.intersection(
+        field[x+j][y].verticalEntries,
+        _.flatten(solutions[infoCell.vSum][infoCell.vCount])
+      )
+  }
+}
+
+function calcPossibilitiesSetValue(cell) {
+  cell.horizontalEntries = cell.verticalEntries =
+    _.intersection(cell.horizontalEntries, cell.verticalEntries)
+
+  cell.value =
+    cell.horizontalEntries.length === 1
+      ? cell.horizontalEntries[0]
+      : 0
+}
+
 function solve() {
-  for (let i = 0; i < field.length; i++) {
-    for (let j = 0; j < field[0].length; j++) {
-      const cell = field[i][j]
+  finished = false
+
+  for (let x = 0; x < field.length; x++) {
+    for (let y = 0; y < field[0].length; y++) {
+      const cell = field[x][y]
 
       if (cell instanceof InfoCell) {
-        for (let k = 1; k <= cell.hCount; k++) {
-          field[i][j+k].horizontalEntries =
-            _.intersection(
-              field[i][j+k].horizontalEntries,
-              _.flatten(solutions[cell.hSum][cell.hCount])
-            )
-        }
-        for (let l = 1; l <= cell.vCount; l++) {
-          field[i+l][j].verticalEntries =
-            _.intersection(
-              field[i+l][j].verticalEntries,
-              _.flatten(solutions[cell.vSum][cell.vCount])
-            )
-        }
+        setEntriesForWhiteCells(cell, x, y)
+      } else if (cell instanceof WhiteCell) {
+        calcPossibilitiesSetValue(cell)
       }
     }
   }
