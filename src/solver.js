@@ -20,7 +20,7 @@ function WhiteCell() {
   this.value = 0
 }
 
-function CROSS_4X4() {
+function CROSS_4X4_INTERMEDIATE() {
   let wC1 = new WhiteCell()
   let wC2 = new WhiteCell()
   let wC3 = new WhiteCell()
@@ -36,24 +36,24 @@ function CROSS_4X4() {
   
   allWhiteCells = [wC1, wC2, wC3, wC4, wC5, wC6, wC7, wC8, wC9, wC10, wC11, wC12]
   
-  let entry1 = new Entry(0, 26)
+  let entry1 = new Entry(0, 27)
   entry1.cellsV = [wC1, wC4, wC8, wC11]
   entries.push(entry1)
   wC1.entryV = wC4.entryV = wC8.entryV = wC11.entryV = entry1
 
-  let entry2 = new Entry(0, 14)
+  let entry2 = new Entry(0, 10)
   entry2.cellsV = [wC2, wC5, wC9, wC12]
   entries.push(entry2)
   wC2.entryV = wC5.entryV = wC9.entryV = wC12.entryV = entry2
 
-  let entry3 = new Entry(9, 6)
+  let entry3 = new Entry(9, 7)
   entry3.cellsH = [wC1, wC2]
   entry3.cellsV = [wC3, wC7]
   entries.push(entry3)
   wC1.entryH = wC2.entryH = entry3
   wC3.entryV = wC7.entryV = entry3
 
-  let entry4 = new Entry(0, 4)
+  let entry4 = new Entry(0, 10)
   entry4.cellsV = [wC6, wC10]
   entries.push(entry4)
   wC6.entryV = wC10.entryV = entry4
@@ -63,18 +63,343 @@ function CROSS_4X4() {
   entries.push(entry5)
   wC3.entryH = wC4.entryH = wC5.entryH = wC6.entryH = entry5
 
-  let entry6 = new Entry(24, 0)
+  let entry6 = new Entry(27, 0)
   entry6.cellsH = [wC7, wC8, wC9, wC10]
   entries.push(entry6)
   wC7.entryH = wC8.entryH = wC9.entryH = wC10.entryH= entry6
 
-  let entry7 = new Entry(3, 0)
+  let entry7 = new Entry(4, 0)
   entry7.cellsH = [wC11, wC12]
   entries.push(entry7)
   wC11.entryH = wC12.entryH = entry7
 }
 
-function UPLEFT_BOTRIGHT_4X4() {
+function CROSS_4X4_HARD() {
+  let wC1 = new WhiteCell()
+  let wC2 = new WhiteCell()
+  let wC3 = new WhiteCell()
+  let wC4 = new WhiteCell()
+  let wC5 = new WhiteCell()
+  let wC6 = new WhiteCell()
+  let wC7 = new WhiteCell()
+  let wC8 = new WhiteCell()
+  let wC9 = new WhiteCell()
+  let wC10 = new WhiteCell()
+  let wC11 = new WhiteCell()
+  let wC12 = new WhiteCell()
+  
+  allWhiteCells = [wC1, wC2, wC3, wC4, wC5, wC6, wC7, wC8, wC9, wC10, wC11, wC12]
+  
+  let entry1 = new Entry(0, 27)
+  entry1.cellsV = [wC1, wC4, wC8, wC11]
+  entries.push(entry1)
+  wC1.entryV = wC4.entryV = wC8.entryV = wC11.entryV = entry1
+
+  let entry2 = new Entry(0, 14)
+  entry2.cellsV = [wC2, wC5, wC9, wC12]
+  entries.push(entry2)
+  wC2.entryV = wC5.entryV = wC9.entryV = wC12.entryV = entry2
+
+  let entry3 = new Entry(13, 4)
+  entry3.cellsH = [wC1, wC2]
+  entry3.cellsV = [wC3, wC7]
+  entries.push(entry3)
+  wC1.entryH = wC2.entryH = entry3
+  wC3.entryV = wC7.entryV = entry3
+
+  let entry4 = new Entry(0, 16)
+  entry4.cellsV = [wC6, wC10]
+  entries.push(entry4)
+  wC6.entryV = wC10.entryV = entry4
+
+  let entry5 = new Entry(14, 0)
+  entry5.cellsH = [wC3, wC4, wC5, wC6]
+  entries.push(entry5)
+  wC3.entryH = wC4.entryH = wC5.entryH = wC6.entryH = entry5
+
+  let entry6 = new Entry(27, 0)
+  entry6.cellsH = [wC7, wC8, wC9, wC10]
+  entries.push(entry6)
+  wC7.entryH = wC8.entryH = wC9.entryH = wC10.entryH= entry6
+
+  let entry7 = new Entry(7, 0)
+  entry7.cellsH = [wC11, wC12]
+  entries.push(entry7)
+  wC11.entryH = wC12.entryH = entry7
+}
+
+function CROSS_4X4_EXPERT() {
+  let wC1 = new WhiteCell()
+  let wC2 = new WhiteCell()
+  let wC3 = new WhiteCell()
+  let wC4 = new WhiteCell()
+  let wC5 = new WhiteCell()
+  let wC6 = new WhiteCell()
+  let wC7 = new WhiteCell()
+  let wC8 = new WhiteCell()
+  let wC9 = new WhiteCell()
+  let wC10 = new WhiteCell()
+  let wC11 = new WhiteCell()
+  let wC12 = new WhiteCell()
+  
+  allWhiteCells = [wC1, wC2, wC3, wC4, wC5, wC6, wC7, wC8, wC9, wC10, wC11, wC12]
+  
+  let entry1 = new Entry(0, 14)
+  entry1.cellsV = [wC1, wC4, wC8, wC11]
+  entries.push(entry1)
+  wC1.entryV = wC4.entryV = wC8.entryV = wC11.entryV = entry1
+
+  let entry2 = new Entry(0, 18)
+  entry2.cellsV = [wC2, wC5, wC9, wC12]
+  entries.push(entry2)
+  wC2.entryV = wC5.entryV = wC9.entryV = wC12.entryV = entry2
+
+  let entry3 = new Entry(4, 12)
+  entry3.cellsH = [wC1, wC2]
+  entry3.cellsV = [wC3, wC7]
+  entries.push(entry3)
+  wC1.entryH = wC2.entryH = entry3
+  wC3.entryV = wC7.entryV = entry3
+
+  let entry4 = new Entry(0, 5)
+  entry4.cellsV = [wC6, wC10]
+  entries.push(entry4)
+  wC6.entryV = wC10.entryV = entry4
+
+  let entry5 = new Entry(18, 0)
+  entry5.cellsH = [wC3, wC4, wC5, wC6]
+  entries.push(entry5)
+  wC3.entryH = wC4.entryH = wC5.entryH = wC6.entryH = entry5
+
+  let entry6 = new Entry(11, 0)
+  entry6.cellsH = [wC7, wC8, wC9, wC10]
+  entries.push(entry6)
+  wC7.entryH = wC8.entryH = wC9.entryH = wC10.entryH= entry6
+
+  let entry7 = new Entry(16, 0)
+  entry7.cellsH = [wC11, wC12]
+  entries.push(entry7)
+  wC11.entryH = wC12.entryH = entry7
+}
+
+function UPRIGHT_BOTLEFT_SMALL_4X4_INTERMEDIATE() {
+  let wC1 = new WhiteCell()
+  let wC2 = new WhiteCell()
+  let wC3 = new WhiteCell()
+  let wC4 = new WhiteCell()
+  let wC5 = new WhiteCell()
+  let wC6 = new WhiteCell()
+  let wC7 = new WhiteCell()
+  let wC8 = new WhiteCell()
+  let wC9 = new WhiteCell()
+  let wC10 = new WhiteCell()
+  
+  allWhiteCells = [wC1, wC2, wC3, wC4, wC5, wC6, wC7, wC8, wC9, wC10]
+  
+  let entry1 = new Entry(0, 12)
+  entry1.cellsV = [wC1, wC4, wC8]
+  entries.push(entry1)
+  wC1.entryV = wC4.entryV = wC8.entryV = entry1
+
+  let entry2 = new Entry(0, 17)
+  entry2.cellsV = [wC2, wC5]
+  entries.push(entry2)
+  wC2.entryV = wC5.entryV = entry2
+
+  let entry3 = new Entry(9, 7)
+  entry3.cellsH = [wC1, wC2]
+  entry3.cellsV = [wC3, wC7, wC10]
+  entries.push(entry3)
+  wC1.entryH = wC2.entryH = entry3
+  wC3.entryV = wC7.entryV = wC10.entryV = entry3
+
+  let entry4 = new Entry(12, 10)
+  entry4.cellsH = [wC3, wC4, wC5]
+  entry4.cellsV = [wC6, wC9]
+  entries.push(entry4)
+  wC3.entryH = wC4.entryH = wC5.entryH = entry4
+  wC6.entryV = wC9.entryV = entry4
+
+  let entry5 = new Entry(12, 0)
+  entry5.cellsH = [wC6, wC7, wC8]
+  entries.push(entry5)
+  wC6.entryH = wC7.entryH = wC8.entryH = entry5
+
+  let entry6 = new Entry(13, 0)
+  entry6.cellsH = [wC9, wC10]
+  entries.push(entry6)
+  wC9.entryH = wC10.entryH= entry6
+}
+
+function UPRIGHT_BOTLEFT_WIDE_4X4_HARD() {
+  let wC1 = new WhiteCell()
+  let wC2 = new WhiteCell()
+  let wC3 = new WhiteCell()
+  let wC4 = new WhiteCell()
+  let wC5 = new WhiteCell()
+  let wC6 = new WhiteCell()
+  let wC7 = new WhiteCell()
+  let wC8 = new WhiteCell()
+  let wC9 = new WhiteCell()
+  let wC10 = new WhiteCell()
+  let wC11 = new WhiteCell()
+  let wC12 = new WhiteCell()
+  
+  allWhiteCells = [wC1, wC2, wC3, wC4, wC5, wC6, wC7, wC8, wC9, wC10, wC11, wC12]
+  
+  let entry1 = new Entry(0, 18)
+  entry1.cellsV = [wC1, wC4, wC8, wC11]
+  entries.push(entry1)
+  wC1.entryV = wC4.entryV = wC8.entryV = wC11.entryV = entry1
+
+  let entry2 = new Entry(0, 10)
+  entry2.cellsV = [wC2, wC5, wC9, wC12]
+  entries.push(entry2)
+  wC2.entryV = wC5.entryV = wC9.entryV = wC12.entryV = entry2
+
+  let entry3 = new Entry(0, 17)
+  entry3.cellsV = [wC3, wC6]
+  entries.push(entry3)
+  wC3.entryV = wC6.entryV = entry3
+
+  let entry4 = new Entry(11, 0)
+  entry4.cellsH = [wC1, wC2, wC3]
+  entries.push(entry4)
+  wC1.entryH = wC2.entryH = wC3.entryH = entry4
+
+  let entry5 = new Entry(13, 16)
+  entry5.cellsH = [wC4, wC5, wC6]
+  entry5.cellsV = [wC7, wC10]
+  entries.push(entry5)
+  wC4.entryH = wC5.entryH = wC6.entryH = entry5
+  wC7.entryV = wC10.entryV = entry5
+
+  let entry6 = new Entry(21, 0)
+  entry6.cellsH = [wC7, wC8, wC9]
+  entries.push(entry6)
+  wC7.entryH = wC8.entryH = wC9.entryH = entry6
+
+  let entry7 = new Entry(16, 0)
+  entry7.cellsH = [wC10, wC11, wC12]
+  entries.push(entry7)
+  wC10.entryH = wC11.entryH = wC12.entryH = entry7
+}
+
+function UPLEFT_BOTRIGHT_WIDE_4X4_HARD() {
+  let wC1 = new WhiteCell()
+  let wC2 = new WhiteCell()
+  let wC3 = new WhiteCell()
+  let wC4 = new WhiteCell()
+  let wC5 = new WhiteCell()
+  let wC6 = new WhiteCell()
+  let wC7 = new WhiteCell()
+  let wC8 = new WhiteCell()
+  let wC9 = new WhiteCell()
+  let wC10 = new WhiteCell()
+  let wC11 = new WhiteCell()
+  let wC12 = new WhiteCell()
+  
+  allWhiteCells = [wC1, wC2, wC3, wC4, wC5, wC6, wC7, wC8, wC9, wC10, wC11, wC12]
+  
+  let entry1 = new Entry(0, 16)
+  entry1.cellsV = [wC1, wC4]
+  entries.push(entry1)
+  wC1.entryV = wC4.entryV = entry1
+
+  let entry2 = new Entry(0, 26)
+  entry2.cellsV = [wC2, wC5, wC7, wC10]
+  entries.push(entry2)
+  wC2.entryV = wC5.entryV = wC7.entryV = wC10.entryV = entry2
+
+  let entry3 = new Entry(0, 14)
+  entry3.cellsV = [wC3, wC6, wC8, wC11]
+  entries.push(entry3)
+  wC3.entryV = wC6.entryV = wC8.entryV = wC11.entryV = entry3
+
+  let entry4 = new Entry(24, 0)
+  entry4.cellsH = [wC1, wC2, wC3]
+  entries.push(entry4)
+  wC1.entryH = wC2.entryH = wC3.entryH = entry4
+
+  let entry5 = new Entry(11, 0)
+  entry5.cellsH = [wC4, wC5, wC6]
+  entries.push(entry5)
+  wC4.entryH = wC5.entryH = wC6.entryH = entry5
+
+  let entry6 = new Entry(0, 7)
+  entry6.cellsV = [wC9, wC12]
+  entries.push(entry6)
+  wC9.entryV = wC12.entryV = entry6
+
+  let entry7 = new Entry(9, 0)
+  entry7.cellsH = [wC7, wC8, wC9]
+  entries.push(entry7)
+  wC7.entryH = wC8.entryH = wC9.entryH = entry7
+
+  let entry8 = new Entry(19, 0)
+  entry8.cellsH = [wC10, wC11, wC12]
+  entries.push(entry8)
+  wC10.entryH = wC11.entryH = wC12.entryH = entry8
+}
+
+function UPLEFT_BOTRIGHT_WIDE_4X4_EXPERT() {
+  let wC1 = new WhiteCell()
+  let wC2 = new WhiteCell()
+  let wC3 = new WhiteCell()
+  let wC4 = new WhiteCell()
+  let wC5 = new WhiteCell()
+  let wC6 = new WhiteCell()
+  let wC7 = new WhiteCell()
+  let wC8 = new WhiteCell()
+  let wC9 = new WhiteCell()
+  let wC10 = new WhiteCell()
+  let wC11 = new WhiteCell()
+  let wC12 = new WhiteCell()
+  
+  allWhiteCells = [wC1, wC2, wC3, wC4, wC5, wC6, wC7, wC8, wC9, wC10, wC11, wC12]
+  
+  let entry1 = new Entry(0, 8)
+  entry1.cellsV = [wC1, wC4]
+  entries.push(entry1)
+  wC1.entryV = wC4.entryV = entry1
+
+  let entry2 = new Entry(0, 23)
+  entry2.cellsV = [wC2, wC5, wC7, wC10]
+  entries.push(entry2)
+  wC2.entryV = wC5.entryV = wC7.entryV = wC10.entryV = entry2
+
+  let entry3 = new Entry(0, 19)
+  entry3.cellsV = [wC3, wC6, wC8, wC11]
+  entries.push(entry3)
+  wC3.entryV = wC6.entryV = wC8.entryV = wC11.entryV = entry3
+
+  let entry4 = new Entry(24, 0)
+  entry4.cellsH = [wC1, wC2, wC3]
+  entries.push(entry4)
+  wC1.entryH = wC2.entryH = wC3.entryH = entry4
+
+  let entry5 = new Entry(9, 0)
+  entry5.cellsH = [wC4, wC5, wC6]
+  entries.push(entry5)
+  wC4.entryH = wC5.entryH = wC6.entryH = entry5
+
+  let entry6 = new Entry(0, 17)
+  entry6.cellsV = [wC9, wC12]
+  entries.push(entry6)
+  wC9.entryV = wC12.entryV = entry6
+
+  let entry7 = new Entry(23, 0)
+  entry7.cellsH = [wC7, wC8, wC9]
+  entries.push(entry7)
+  wC7.entryH = wC8.entryH = wC9.entryH = entry7
+
+  let entry8 = new Entry(11, 0)
+  entry8.cellsH = [wC10, wC11, wC12]
+  entries.push(entry8)
+  wC10.entryH = wC11.entryH = wC12.entryH = entry8
+}
+
+function UPLEFT_BOTRIGHT_4X4_EASY() {
   let wC1 = new WhiteCell()
   let wC2 = new WhiteCell()
   let wC3 = new WhiteCell()
@@ -131,7 +456,7 @@ function UPLEFT_BOTRIGHT_4X4() {
   wC10.entryH = wC11.entryH = wC12.entryH = entry8
 }
 
-function SWASTIKA_ROTATE_6X6() {
+function SWASTIKA_ROTATE_6X6_EASY() {
   let wC1 = new WhiteCell()
   let wC2 = new WhiteCell()
   let wC3 = new WhiteCell()
@@ -278,6 +603,29 @@ function calcPossibleSolutions(wCells, solutionSets) {
   })
 }
 
+function updateNotesWithSets() {
+  entries.forEach(entry => {
+    if (entry.sumH) {
+      entry.cellsH.forEach(wCell => {
+        let unionSets = []
+        entry.solutionSetsH.forEach(set => {
+          unionSets = _.union(unionSets, set)
+        })
+        wCell.notes = _.intersection(wCell.notes, unionSets)
+      })
+    }
+    if (entry.sumV) {
+      entry.cellsV.forEach(wCell => {
+        let unionSets = []
+        entry.solutionSetsV.forEach(set => {
+          unionSets = _.union(unionSets, set)
+        })
+        wCell.notes = _.intersection(wCell.notes, unionSets)
+      })
+    }
+  })
+}
+
 function updateEntries() {
   entries.forEach(entry => {
     if (entry.sumH) {
@@ -292,7 +640,6 @@ function updateEntries() {
         entry.solutionSetsV =
           _.filter(entry.solutionSetsV, set => 
             _.intersection(set, cell.notes).length > 0)
-        console.log('sV: ', entry.solutionSetsV)
       })
     }
   })
@@ -307,8 +654,7 @@ function calcUnionOfWhiteCellsInEntry() {
       })
 
       entry.solutionSetsH =
-        _.filter(entry.solutionSetsH, set => 
-          _.difference(set, union).length === 0)
+        _.filter(entry.solutionSetsH, set => _.difference(set, union).length === 0)
     }
     if (entry.sumV) {
       let union = []
@@ -317,8 +663,47 @@ function calcUnionOfWhiteCellsInEntry() {
       })
 
       entry.solutionSetsV =
-        _.filter(entry.solutionSetsV, set => 
-          _.difference(set, union).length === 0)
+        _.filter(entry.solutionSetsV, set => _.difference(set, union).length === 0)
+    }
+  })
+}
+
+
+
+function guessNumberWithOtherWhiteCells() {
+  entries.forEach(entry => {
+    if (entry.sumH) {
+      entry.solutionSetsH.forEach(set => {
+        let possibleValues
+        allWhiteCells.forEach(wCell => {
+          possibleValues = _.difference(set, [wCell.value])
+        })
+        if (possibleValues.length === 1) {
+          console.log('smart')
+          allWhiteCells.forEach(wCell => {
+            if (!wCell.value) {
+              wCell.notes = [...possibleValues]
+            }
+          })
+        }
+      })
+    }
+    if (entry.sumV) {
+      entry.solutionSetsV.forEach(set => {
+        let possibleValues
+        allWhiteCells.forEach(wCell => {
+          possibleValues = _.difference(set, [wCell.value])
+        })
+        if (possibleValues.length === 1) {
+          console.log('smart')
+
+          allWhiteCells.forEach(wCell => {
+            if (!wCell.value) {
+              wCell.notes = [...possibleValues]
+            }
+          })
+        }
+      })
     }
   })
 }
@@ -368,109 +753,61 @@ function checkPossibleSolutions() {
   })
 }
 
-function checkNotesWithSets() {
-  entries.forEach(entry => {
-    if (entry.sumH) {
-      entry.cellsH.forEach(wCell => {
-        if (!wCell.value) {
-          let possibleSolutions = []
-
-          entry.solutionSetsH.forEach(set => {
-            const isect = _.intersection(wCell.notes, set)
-            if (isect.length === 1) {
-              possibleSolutions = [...isect, ...possibleSolutions]
-            }
-          })
-          if (possibleSolutions.length === 1) {
-            wCell.value = possibleSolutions[0]
-            wCell.notes = [...possibleSolutions]
-
-            entry.cellsH.forEach(cell => {
-              if (!Object.is(wCell, cell)) {
-                cell.notes = _.difference(cell.notes, wCell.notes)
-              }
-            })
-            if (wCell.entryV.sumV) {
-              wCell.entryV.cellsV.forEach(cell => {
-                if (!Object.is(wCell, cell)) {
-                  cell.notes = _.difference(cell.notes, wCell.notes)
-                }
-              })
-            }
-          }
-        }
-      })
-    }
-    if (entry.sumV) {
-      entry.cellsV.forEach(wCell => {
-        if (!wCell.value) {
-          let possibleSolutions = []
-
-          entry.solutionSetsV.forEach(set => {
-            const isect = _.intersection(wCell.notes, set)
-            if (isect.length === 1) {
-              possibleSolutions = [...isect, ...possibleSolutions]
-            }
-          })
-          if (possibleSolutions.length === 1) {
-            wCell.value = possibleSolutions[0]
-            wCell.notes = [...possibleSolutions]
-
-            entry.cellsV.forEach(cell => {
-              if (!Object.is(wCell, cell)) {
-                cell.notes = _.difference(cell.notes, wCell.notes)
-              }
-            })
-            if (wCell.entryH.sumH) {
-              wCell.entryH.cellsH.forEach(cell => {
-                if (!Object.is(wCell, cell)) {
-                  cell.notes = _.difference(cell.notes, wCell.notes)
-                }
-              })
-            }
-          }
-        }
-      })
-    }
+function setLastIteration() {
+  let lastIteration = []
+  allWhiteCells.forEach(wCell => {
+    lastIteration = [...lastIteration, wCell.notes]
   })
+  return lastIteration
 }
 
-function updateNotesWithSets() {
-  entries.forEach(entry => {
-    if (entry.sumH) {
-      entry.cellsH.forEach(wCell => {
-        let unionSets = []
-        entry.solutionSetsH.forEach(set => {
-          unionSets = _.union(unionSets, set)
-        })
-        wCell.notes = _.intersection(wCell.notes, unionSets)
-      })
+function isStuck(lastIteration) {
+  for (let i = 0; i < allWhiteCells.length; i++) {
+    const diff = _.difference(lastIteration[i], allWhiteCells[i].notes)
+    if (diff.length > 0) {
+      return false
     }
-    if (entry.sumV) {
-      entry.cellsV.forEach(wCell => {
-        let unionSets = []
-        entry.solutionSetsV.forEach(set => {
-          unionSets = _.union(unionSets, set)
-        })
-        wCell.notes = _.intersection(wCell.notes, unionSets)
-      })
+  }
+  return true
+}
+
+function guessNumber() {
+  let tryLength = 2
+  
+  while (tryLength <= 9) {
+    for (let i = 0; i < 20; i++) {
+        const rndCell = Math.floor(Math.random() * allWhiteCells.length)
+        let wCell = allWhiteCells[rndCell]
+        const rndNote = Math.floor(Math.random() * wCell.notes.length)
+    
+        if (!wCell.value && wCell.notes.length <= tryLength) {
+          wCell.notes = [wCell.notes[rndNote]]
+          return
+        }
     }
-  })
+    ++tryLength
+  }
 }
 
 export default () => {
-  SWASTIKA_ROTATE_6X6()
-  setupSolutionSets()
+  let lastIteration = []
 
-  for (let i = 0; i < 15; i++) {
+  UPLEFT_BOTRIGHT_WIDE_4X4_EXPERT()
+  lastIteration = setLastIteration()
+  setupSolutionSets()
+  
+  for (let i = 0; i < 8; i++) {
     updateNotesWithSets()
     updateEntries()
     calcUnionOfWhiteCellsInEntry()
     checkPossibleSolutions()
+    // guessNumberWithOtherWhiteCells()
 
-    // TODO: Breaks the rest, puts weird Values, that shouldn't be possible
-    // checkNotesWithSets()
-    console.log('----------------------------------------------------')
+    if (isStuck(lastIteration)) {
+      console.log('i: ', i)
+      // guessNumber()
+    }
+    lastIteration = setLastIteration()
   }
 
   console.log(entries)
