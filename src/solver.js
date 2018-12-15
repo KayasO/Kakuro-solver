@@ -1,6 +1,5 @@
 import _ from 'lodash'
 
-import { CROSS_4X4_INTERMEDIATE } from './boardSetup'
 import solutions from './solutions'
 
 let entries = []
@@ -201,10 +200,9 @@ function setFirstIteration() {
   return firstIteration
 }
 
-export default () => {
-  const result = CROSS_4X4_INTERMEDIATE()
-  entries = result.entries
-  allWhiteCells = result.allWhiteCells
+export default (fieldAsLists) => {
+  entries = fieldAsLists.entries
+  allWhiteCells = fieldAsLists.allWhiteCells
 
   let finished = false
   let solutionsCopy = []
