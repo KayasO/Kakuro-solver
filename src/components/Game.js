@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import Field from './Field'
 
 class Game extends Component {
-  state = {}
-
   render() {
+    const { field, rendering } = this.props
     return (
       <div>
-        <Field />
+        <Field field={field} rendering={rendering}/>
       </div>
     )
   }

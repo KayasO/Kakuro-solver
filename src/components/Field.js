@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { Table, TableBody, TableRow } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
+import _ from 'lodash'
+
 import Cell from './Cell'
+import EntryCell from './EntryCell'
+import { WhiteCell } from '../WhiteCell'
+import { Entry } from '../Entry'
 
 const styles = theme => ({
   table: {
@@ -17,45 +22,32 @@ const styles = theme => ({
 // TODO: Probably doesn't need any Logic
 class Field extends Component {
   render() {
-    const { classes } = this.props
+    const { classes, field, rendering } = this.props
+
+    console.log('Field: ', field)
+    console.log(rendering)
+
     return (
       <Table className={classes.table} padding="dense">
         <TableBody>
-          <TableRow key="1">
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="2" right="6" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-          </TableRow>
-          <TableRow key="2">
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-          </TableRow>
-          <TableRow key="3">
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-          </TableRow>
-          <TableRow key="4">
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-          </TableRow>
-          <TableRow key="5">
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-            <Cell classes={classes} below="8" right="14" />
-          </TableRow>
+          {
+            _.map(field, (row, i) =>
+              <TableRow key={i}>
+                {
+                  _.map(row, cell => {
+                    if (cell instanceof Entry) {
+                      return <EntryCell classes={classes} below={cell.sumV} right={cell.sumH} />
+                    }
+                    else if (cell instanceof WhiteCell) {
+                      return <Cell classes={classes} value={cell.value} />
+                    } else {
+                      return <Cell classes={classes} />
+                    }
+                  })
+                }
+              </TableRow>
+            )
+          }
         </TableBody>
       </Table>
     )
