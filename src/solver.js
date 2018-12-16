@@ -242,6 +242,7 @@ export default (fieldAsLists) => {
           const save = saveField(solutionsCopy, notesCopy, solutionListCopy)
           solutionsCopy = save.solutionsCopy
           notesCopy = save.notesCopy
+          solutionListCopy = save.solutionListCopy
         }
         
         guessNumber()

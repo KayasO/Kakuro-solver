@@ -5,7 +5,7 @@ import _ from 'lodash'
 
 import Field from './Field'
 import { mapToLists, mapToSimpleList } from './../mapper'
-import { EASY_EXAMPLE } from './../boardSetupNew'
+import { EXPERT_9x17 } from './../boardSetupNew'
 import solve from './../solver'
 
 class Game extends Component {
@@ -16,7 +16,7 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    const boardSetup = EASY_EXAMPLE()
+    const boardSetup = EXPERT_9x17()
     this.setState({
       field: mapToSimpleList(boardSetup),
       solutionList: solve(mapToLists(boardSetup)),
@@ -42,6 +42,7 @@ class Game extends Component {
 
   render() {
     const { field } = this.state
+    console.log(this.state.solutionList)
     return (
       <div>
         <Field field={field} />
