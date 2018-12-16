@@ -47,3 +47,26 @@ export function mapToLists(input) {
     allWhiteCells
   }
 }
+
+export function mapToSimpleList(input) {
+  const list = []
+  for (let i = 0; i < input.length; i++)
+    list.push([])
+
+  for (let i = 0; i < input.length; i++) {
+    for (let j = 0; j < input[0].length; j++) {
+      const cell = input[i][j]
+      if (cell instanceof Entry) {
+        list[i].push({sumH: cell.sumH, sumV: cell.sumV})
+      }
+      else if (cell instanceof WhiteCell) {
+        list[i].push({value: cell.value})
+      } else {
+        list[i].push({})
+      }
+    }
+  }
+
+  console.log(list)
+  return list
+}

@@ -241,9 +241,8 @@ export default (fieldAsLists) => {
     }
 
     j++
-    console.log(j)
     finished = _.filter(allWhiteCells, wCell => wCell.value === 0).length === 0
   }
-  console.log(entries)
-  console.log(allWhiteCells)
+  // console.log(entries)
+  // console.log(allWhiteCells)
 }
