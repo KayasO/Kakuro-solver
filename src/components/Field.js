@@ -22,10 +22,7 @@ const styles = theme => ({
 // TODO: Probably doesn't need any Logic
 class Field extends Component {
   render() {
-    const { classes, field, rendering } = this.props
-
-    console.log('Field: ', field)
-    console.log(rendering)
+    const { classes, field } = this.props
 
     return (
       <Table className={classes.table} padding="dense">
