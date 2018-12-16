@@ -5,8 +5,6 @@ import _ from 'lodash'
 
 import Cell from './Cell'
 import EntryCell from './EntryCell'
-import { WhiteCell } from '../WhiteCell'
-import { Entry } from '../Entry'
 
 const styles = theme => ({
   table: {
@@ -32,14 +30,9 @@ class Field extends Component {
               <TableRow key={i}>
                 {
                   _.map(row, cell => {
-                    if (cell instanceof Entry) {
-                      return <EntryCell classes={classes} below={cell.sumV} right={cell.sumH} />
-                    }
-                    else if (cell instanceof WhiteCell) {
-                      return <Cell classes={classes} value={cell.value} />
-                    } else {
-                      return <Cell classes={classes} />
-                    }
+                    return cell.value >= 0 ? 
+                      <Cell classes={classes} value={cell.value} /> :
+                      <EntryCell classes={classes} below={cell.sumV} right={cell.sumH} />
                   })
                 }
               </TableRow>

@@ -4,6 +4,7 @@ import solutions from './solutions'
 
 let entries = []
 let allWhiteCells = []
+let solutionList = []
 
 function setupSolutionSets() {
   entries.forEach(entry => {
@@ -95,6 +96,7 @@ function checkPossibleSolutions() {
       entry.cellsH.forEach(wCell => {
         if (wCell.notes.length === 1 && !wCell.value) {
           wCell.value = wCell.notes[0]
+          solutionList.push(wCell)
 
           entry.cellsH.forEach(cell => {
             if (!Object.is(wCell, cell)) {
@@ -115,6 +117,7 @@ function checkPossibleSolutions() {
       entry.cellsV.forEach(wCell => {
         if (wCell.notes.length === 1 && !wCell.value) {
           wCell.value = wCell.notes[0]
+          solutionList.push(wCell)
 
           entry.cellsV.forEach(cell => {
             if (!Object.is(wCell, cell)) {
@@ -170,7 +173,7 @@ function guessNumber() {
   }
 }
 
-function saveField(solutionsCopy, notesCopy) {
+function saveField(solutionsCopy, notesCopy, solutionListCopy) {
   entries.forEach(entry => {
     solutionsCopy = [ ...solutionsCopy, [entry.solutionSetsH, entry.solutionSetsV]]
   })
@@ -178,10 +181,14 @@ function saveField(solutionsCopy, notesCopy) {
   allWhiteCells.forEach(wCell => {
     notesCopy = [ ...notesCopy, wCell.notes]
   })
-  return { solutionsCopy, notesCopy }
+
+  solutionList.forEach(wCell => {
+    solutionListCopy = [ ...solutionListCopy, wCell]
+  })
+  return { solutionsCopy, notesCopy, solutionListCopy }
 }
 
-function loadField(solutionsCopy, notesCopy) {
+function loadField(solutionsCopy, notesCopy, solutionListCopy) {
   for (let i = 0; i < solutionsCopy.length; i++) {
     entries[i].solutionSetsH = solutionsCopy[i][0]
     entries[i].solutionSetsV = solutionsCopy[i][1]
@@ -190,6 +197,10 @@ function loadField(solutionsCopy, notesCopy) {
     allWhiteCells[i].notes = notesCopy[i]
     allWhiteCells[i].value = notesCopy[i].length === 1 ? notesCopy[i][0] : 0
   }
+  solutionList = []
+  solutionListCopy.forEach(wCell => {
+    solutionList = [...solutionList, wCell]
+  })
 }
 
 function setFirstIteration() {
@@ -207,6 +218,7 @@ export default (fieldAsLists) => {
   let finished = false
   let solutionsCopy = []
   let notesCopy = []
+  let solutionListCopy = []
   let lastIteration = []
   let stuckCounter = 0
 
@@ -215,7 +227,7 @@ export default (fieldAsLists) => {
   let j = 0
   while (!finished) {
     if (j > 0)
-      loadField(solutionsCopy, notesCopy)
+      loadField(solutionsCopy, notesCopy, solutionListCopy)
 
     stuckCounter = 0
     lastIteration = setFirstIteration()
@@ -227,7 +239,7 @@ export default (fieldAsLists) => {
   
       if (isStuck(lastIteration)) {
         if (solutionsCopy.length === 0) {
-          const save = saveField(solutionsCopy, notesCopy)
+          const save = saveField(solutionsCopy, notesCopy, solutionListCopy)
           solutionsCopy = save.solutionsCopy
           notesCopy = save.notesCopy
         }
@@ -243,6 +255,6 @@ export default (fieldAsLists) => {
     j++
     finished = _.filter(allWhiteCells, wCell => wCell.value === 0).length === 0
   }
-  // console.log(entries)
-  // console.log(allWhiteCells)
+
+  return solutionList
 }

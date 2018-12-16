@@ -66,7 +66,5 @@ export function mapToSimpleList(input) {
       }
     }
   }
-
-  console.log(list)
   return list
 }
