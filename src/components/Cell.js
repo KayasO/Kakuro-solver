@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { TableCell } from '@material-ui/core'
+import styled from 'styled-components'
+
+const WhiteCell = styled(TableCell)`
+  background-color: ${props => props.children ? "lime" : "red"};
+`
 
 // TODO: Split Cell in two halves
 export default ({ classes, value }) => {
   return (
-      <TableCell className={classes.tableCell}>
+      <WhiteCell className={classes.tableCell}>
         {value}
-      </TableCell>
+      </WhiteCell>
     )
 }
