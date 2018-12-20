@@ -28,7 +28,7 @@ function calcPossibleSolutions(wCells, solutionSets) {
       cell: wCell,
       notesBefore: wCell.notes,
       possibleSolutions,
-      description: 'Only possible number',
+      description: 'only',
     }
 
     wCell.notes = _.intersection(wCell.notes, possibleSolutions)

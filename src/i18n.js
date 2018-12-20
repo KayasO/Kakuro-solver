@@ -1,30 +1,25 @@
-import i18n from "i18next";
-import { reactI18nextModule } from "react-i18next";
-​
-import translationEN from '../public/locales/en-US.json';
-import translationDE from '../public/locales/de-DE.json';
-​
-// the translations
-const resources = { 
+import i18n from 'i18next'
+import { reactI18nextModule } from 'react-i18next'
+
+import translationEN from './locales/en-US.json'
+import translationDE from './locales/de-DE.json'
+
+const resources = {
   en: {
-    translation: translationEN
+    translation: translationEN,
   },
   de: {
-    translation: translationDE
-  }
-};
-​
-i18n
-  .use(reactI18nextModule) // passes i18n down to react-i18next
-  .init({
-    resources,
-    lng: "de",
-​
-    keySeparator: false, // we do not use keys in form messages.welcome
-​
-    interpolation: {
-      escapeValue: false // react already safes from xss
-    }
-  });
-​
-export default i18n;
+    translation: translationDE,
+  },
+}
+
+i18n.use(reactI18nextModule).init({
+  resources,
+  lng: 'en',
+
+  interpolation: {
+    escapeValue: false,
+  },
+})
+
+export default i18n

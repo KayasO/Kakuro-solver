@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import 'typeface-roboto'
 
-import './i18n'
 import Game from './components/Game'
 
 class App extends Component {
