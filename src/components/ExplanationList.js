@@ -5,7 +5,6 @@ import _ from 'lodash'
 export default props => {
   const { explanationList } = props
 
-  console.log(explanationList)
   return (
     <List>
       {explanationList &&

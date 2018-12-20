@@ -5,7 +5,7 @@ import _ from 'lodash'
 import Field from './Field'
 import ExplanationList from './ExplanationList'
 import { mapToLists, mapToSimpleList } from './../mapper'
-import { EASY_EXAMPLE } from './../boardSetupNew'
+import { CHALLENGING_4x4 } from './../boardSetupNew'
 import solve from './../solver'
 
 class Game extends Component {
@@ -13,10 +13,11 @@ class Game extends Component {
     boardSetup: [],
     field: [],
     solutionEvents: [],
+    explanationList: [],
   }
 
   componentDidMount() {
-    const boardSetup = EASY_EXAMPLE()
+    const boardSetup = CHALLENGING_4x4()
     this.setState({
       field: mapToSimpleList(boardSetup),
       solutionEvents: solve(mapToLists(boardSetup)),
@@ -29,19 +30,22 @@ class Game extends Component {
 
     boardSetup.forEach((row, i) => {
       row.forEach((cell, j) => {
-        if (solutionEvents[0] === cell) {
-          field[i][j].value = solutionEvents[0].value
+        if (solutionEvents[0] && solutionEvents[0].cell === cell) {
+          field[i][j].value = solutionEvents[0].cell.value
         }
       })
     })
 
     this.setState({
+      explanationList: solutionEvents[0]
+        ? [...this.state.explanationList, solutionEvents[0]]
+        : this.state.explanationList,
       solutionEvents: _.drop(solutionEvents),
     })
   }
 
   render() {
-    const { field, solutionEvents } = this.state
+    const { field, explanationList } = this.state
     return (
       <Grid container>
         <Grid item xs={6}>
@@ -49,13 +53,13 @@ class Game extends Component {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => console.log('Pressed Next')}
+            onClick={this.solverNextStep}
           >
             Next
           </Button>
         </Grid>
         <Grid item xs={6}>
-          <ExplanationList explanationList={solutionEvents} />
+          <ExplanationList explanationList={explanationList} />
         </Grid>
       </Grid>
     )
