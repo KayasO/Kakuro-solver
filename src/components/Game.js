@@ -42,7 +42,6 @@ class Game extends Component {
 
   render() {
     const { field } = this.state
-    console.log(this.state.solutionList)
     return (
       <div>
         <Field field={field} />
