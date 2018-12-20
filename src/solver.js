@@ -4,7 +4,7 @@ import solutions from './solutions'
 
 let entries = []
 let allWhiteCells = []
-let solutionList = []
+let solutionEvents = []
 
 function setupSolutionSets() {
   entries.forEach(entry => {
@@ -21,7 +21,21 @@ function setupSolutionSets() {
 
 function calcPossibleSolutions(wCells, solutionSets) {
   wCells.forEach(wCell => {
-    wCell.notes = _.intersection(wCell.notes, _.flatten(solutionSets))
+    let event
+    const possibleSolutions = _.flatten(solutionSets)
+
+    event = {
+      cell: wCell,
+      notesBefore: wCell.notes,
+      possibleSolutions,
+      description: 'Only possible number',
+    }
+
+    wCell.notes = _.intersection(wCell.notes, possibleSolutions)
+
+    if (wCell.notes.length === 1) {
+      solutionEvents.push(event)
+    }
   })
 }
 
@@ -33,7 +47,21 @@ function updateNotesWithSets() {
         entry.solutionSetsH.forEach(set => {
           unionSets = _.union(unionSets, set)
         })
+
+        const event = {
+          cell: wCell,
+          notesBefore: wCell.notes,
+          possibleSolutions: unionSets,
+          description: 'intersection notes with unionSets',
+        }
+
         wCell.notes = _.intersection(wCell.notes, unionSets)
+        if (
+          wCell.notes.length === 1 &&
+          _.findIndex(solutionEvents, el => el.cell === wCell) === -1
+        ) {
+          solutionEvents.push(event)
+        }
       })
     }
     if (entry.sumV) {
@@ -42,7 +70,21 @@ function updateNotesWithSets() {
         entry.solutionSetsV.forEach(set => {
           unionSets = _.union(unionSets, set)
         })
+
+        const event = {
+          cell: wCell,
+          notesBefore: wCell.notes,
+          possibleSolutions: unionSets,
+          description: 'intersection notes with unionSets',
+        }
+
         wCell.notes = _.intersection(wCell.notes, unionSets)
+        if (
+          wCell.notes.length === 1 &&
+          _.findIndex(solutionEvents, el => el.cell === wCell) === -1
+        ) {
+          solutionEvents.push(event)
+        }
       })
     }
   })
@@ -52,16 +94,18 @@ function updateEntries() {
   entries.forEach(entry => {
     if (entry.sumH) {
       entry.cellsH.forEach(cell => {
-        entry.solutionSetsH =
-          _.filter(entry.solutionSetsH, set =>
-            _.intersection(set, cell.notes).length > 0)
+        entry.solutionSetsH = _.filter(
+          entry.solutionSetsH,
+          set => _.intersection(set, cell.notes).length > 0
+        )
       })
     }
     if (entry.sumV) {
       entry.cellsV.forEach(cell => {
-        entry.solutionSetsV =
-          _.filter(entry.solutionSetsV, set => 
-            _.intersection(set, cell.notes).length > 0)
+        entry.solutionSetsV = _.filter(
+          entry.solutionSetsV,
+          set => _.intersection(set, cell.notes).length > 0
+        )
       })
     }
   })
@@ -75,8 +119,10 @@ function calcUnionOfWhiteCellsInEntry() {
         union = _.union(union, cell.notes)
       })
 
-      entry.solutionSetsH =
-        _.filter(entry.solutionSetsH, set => _.difference(set, union).length === 0)
+      entry.solutionSetsH = _.filter(
+        entry.solutionSetsH,
+        set => _.difference(set, union).length === 0
+      )
     }
     if (entry.sumV) {
       let union = []
@@ -84,8 +130,10 @@ function calcUnionOfWhiteCellsInEntry() {
         union = _.union(union, cell.notes)
       })
 
-      entry.solutionSetsV =
-        _.filter(entry.solutionSetsV, set => _.difference(set, union).length === 0)
+      entry.solutionSetsV = _.filter(
+        entry.solutionSetsV,
+        set => _.difference(set, union).length === 0
+      )
     }
   })
 }
@@ -96,17 +144,42 @@ function checkPossibleSolutions() {
       entry.cellsH.forEach(wCell => {
         if (wCell.notes.length === 1 && !wCell.value) {
           wCell.value = wCell.notes[0]
-          solutionList.push(wCell)
 
           entry.cellsH.forEach(cell => {
             if (!Object.is(wCell, cell)) {
+              let event = {
+                cell,
+                notesBefore: cell.notes,
+                possibleSolutions: wCell.notes,
+                description: 'Cell was solved => this cell can be solved',
+              }
+
               cell.notes = _.difference(cell.notes, wCell.notes)
+              if (
+                cell.notes.length === 1 &&
+                _.findIndex(solutionEvents, el => el.cell === cell) === -1
+              ) {
+                solutionEvents.push(event)
+              }
             }
           })
           if (wCell.entryV.sumV) {
             wCell.entryV.cellsV.forEach(cell => {
               if (!Object.is(wCell, cell)) {
+                let event = {
+                  cell,
+                  notesBefore: cell.notes,
+                  possibleSolutions: wCell.notes,
+                  description: 'Cell was solved => this cell can be solved',
+                }
+
                 cell.notes = _.difference(cell.notes, wCell.notes)
+                if (
+                  cell.notes.length === 1 &&
+                  _.findIndex(solutionEvents, el => el.cell === cell) === -1
+                ) {
+                  solutionEvents.push(event)
+                }
               }
             })
           }
@@ -117,17 +190,42 @@ function checkPossibleSolutions() {
       entry.cellsV.forEach(wCell => {
         if (wCell.notes.length === 1 && !wCell.value) {
           wCell.value = wCell.notes[0]
-          solutionList.push(wCell)
 
           entry.cellsV.forEach(cell => {
             if (!Object.is(wCell, cell)) {
+              let event = {
+                cell,
+                notesBefore: cell.notes,
+                possibleSolutions: wCell.notes,
+                description: 'Cell was solved => this cell can be solved',
+              }
+
               cell.notes = _.difference(cell.notes, wCell.notes)
+              if (
+                cell.notes.length === 1 &&
+                _.findIndex(solutionEvents, el => el.cell === cell) === -1
+              ) {
+                solutionEvents.push(event)
+              }
             }
           })
           if (wCell.entryH.sumH) {
             wCell.entryH.cellsH.forEach(cell => {
               if (!Object.is(wCell, cell)) {
+                let event = {
+                  cell,
+                  notesBefore: cell.notes,
+                  possibleSolutions: wCell.notes,
+                  description: 'Cell was solved => this cell can be solved',
+                }
+
                 cell.notes = _.difference(cell.notes, wCell.notes)
+                if (
+                  cell.notes.length === 1 &&
+                  _.findIndex(solutionEvents, el => el.cell === cell) === -1
+                ) {
+                  solutionEvents.push(event)
+                }
               }
             })
           }
@@ -157,38 +255,48 @@ function isStuck(lastIteration) {
 
 function guessNumber() {
   let tryLength = 2
-  
+
   while (tryLength <= 9) {
     for (let i = 0; i < 20; i++) {
-        const rndCell = Math.floor(Math.random() * allWhiteCells.length)
-        let wCell = allWhiteCells[rndCell]
-        const rndNote = Math.floor(Math.random() * wCell.notes.length)
-    
-        if (wCell.notes.length > 1 && wCell.notes.length <= tryLength) {
-          wCell.notes = [wCell.notes[rndNote]]
-          return
-        }
+      const rndCell = Math.floor(Math.random() * allWhiteCells.length)
+      let wCell = allWhiteCells[rndCell]
+      const rndNote = Math.floor(Math.random() * wCell.notes.length)
+
+      if (wCell.notes.length > 1 && wCell.notes.length <= tryLength) {
+        const notesBefore = wCell.notes
+        wCell.notes = [wCell.notes[rndNote]]
+
+        solutionEvents.push({
+          cell: wCell,
+          notesBefore,
+          description: 'choosing random possible solution',
+        })
+        return
+      }
     }
     ++tryLength
   }
 }
 
-function saveField(solutionsCopy, notesCopy, solutionListCopy) {
+function saveField(solutionsCopy, notesCopy, solutionEventsCopy) {
   entries.forEach(entry => {
-    solutionsCopy = [ ...solutionsCopy, [entry.solutionSetsH, entry.solutionSetsV]]
+    solutionsCopy = [
+      ...solutionsCopy,
+      [entry.solutionSetsH, entry.solutionSetsV],
+    ]
   })
 
   allWhiteCells.forEach(wCell => {
-    notesCopy = [ ...notesCopy, wCell.notes]
+    notesCopy = [...notesCopy, wCell.notes]
   })
 
-  solutionList.forEach(wCell => {
-    solutionListCopy = [ ...solutionListCopy, wCell]
+  solutionEvents.forEach(wCell => {
+    solutionEventsCopy = [...solutionEventsCopy, wCell]
   })
-  return { solutionsCopy, notesCopy, solutionListCopy }
+  return { solutionsCopy, notesCopy, solutionEventsCopy }
 }
 
-function loadField(solutionsCopy, notesCopy, solutionListCopy) {
+function loadField(solutionsCopy, notesCopy, solutionEventsCopy) {
   for (let i = 0; i < solutionsCopy.length; i++) {
     entries[i].solutionSetsH = solutionsCopy[i][0]
     entries[i].solutionSetsV = solutionsCopy[i][1]
@@ -197,37 +305,36 @@ function loadField(solutionsCopy, notesCopy, solutionListCopy) {
     allWhiteCells[i].notes = notesCopy[i]
     allWhiteCells[i].value = notesCopy[i].length === 1 ? notesCopy[i][0] : 0
   }
-  solutionList = []
-  solutionListCopy.forEach(wCell => {
-    solutionList = [...solutionList, wCell]
+  solutionEvents = []
+  solutionEventsCopy.forEach(wCell => {
+    solutionEvents = [...solutionEvents, wCell]
   })
 }
 
 function setFirstIteration() {
   let firstIteration = []
   for (let i = 0; i < allWhiteCells.length; i++) {
-    firstIteration = [ ...firstIteration, [1, 2, 3, 4, 5, 6, 7, 8, 9]]
+    firstIteration = [...firstIteration, [1, 2, 3, 4, 5, 6, 7, 8, 9]]
   }
   return firstIteration
 }
 
-export default (fieldAsLists) => {
+export default fieldAsLists => {
   entries = fieldAsLists.entries
   allWhiteCells = fieldAsLists.allWhiteCells
 
   let finished = false
   let solutionsCopy = []
   let notesCopy = []
-  let solutionListCopy = []
+  let solutionEventsCopy = []
   let lastIteration = []
   let stuckCounter = 0
+  let j = 0
 
   setupSolutionSets()
-  
-  let j = 0
+
   while (!finished) {
-    if (j > 0)
-      loadField(solutionsCopy, notesCopy, solutionListCopy)
+    if (j > 0) loadField(solutionsCopy, notesCopy, solutionEventsCopy)
 
     stuckCounter = 0
     lastIteration = setFirstIteration()
@@ -236,15 +343,15 @@ export default (fieldAsLists) => {
       updateEntries()
       calcUnionOfWhiteCellsInEntry()
       checkPossibleSolutions()
-  
+
       if (isStuck(lastIteration)) {
         if (solutionsCopy.length === 0) {
-          const save = saveField(solutionsCopy, notesCopy, solutionListCopy)
+          const save = saveField(solutionsCopy, notesCopy, solutionEventsCopy)
           solutionsCopy = save.solutionsCopy
           notesCopy = save.notesCopy
-          solutionListCopy = save.solutionListCopy
+          solutionEventsCopy = save.solutionEventsCopy
         }
-        
+
         guessNumber()
         stuckCounter++
       } else {
@@ -257,5 +364,5 @@ export default (fieldAsLists) => {
     finished = _.filter(allWhiteCells, wCell => wCell.value === 0).length === 0
   }
 
-  return solutionList
+  return solutionEvents
 }

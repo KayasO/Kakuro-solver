@@ -2,41 +2,43 @@ import React, { Component } from 'react'
 import { Button } from '@material-ui/core'
 import _ from 'lodash'
 
-
 import Field from './Field'
 import { mapToLists, mapToSimpleList } from './../mapper'
-import { EXPERT_9x17 } from './../boardSetupNew'
+import { EASY_EXAMPLE } from './../boardSetupNew'
 import solve from './../solver'
 
 class Game extends Component {
   state = {
     boardSetup: [],
     field: [],
-    solutionList: []
+    solutionEvents: [],
   }
 
   componentDidMount() {
-    const boardSetup = EXPERT_9x17()
-    this.setState({
-      field: mapToSimpleList(boardSetup),
-      solutionList: solve(mapToLists(boardSetup)),
-      boardSetup
-    })
+    const boardSetup = EASY_EXAMPLE()
+    this.setState(
+      {
+        field: mapToSimpleList(boardSetup),
+        solutionEvents: solve(mapToLists(boardSetup)),
+        boardSetup,
+      },
+      () => console.log(this.state.solutionEvents)
+    )
   }
 
   solverNextStep = () => {
-    const { boardSetup, field, solutionList } = this.state
+    const { boardSetup, field, solutionEvents } = this.state
 
     boardSetup.forEach((row, i) => {
       row.forEach((cell, j) => {
-        if (solutionList[0] === cell) {
-          field[i][j].value = solutionList[0].value
+        if (solutionEvents[0] === cell) {
+          field[i][j].value = solutionEvents[0].value
         }
       })
     })
 
     this.setState({
-      solutionList: _.drop(solutionList)
+      solutionEvents: _.drop(solutionEvents),
     })
   }
 
@@ -45,7 +47,11 @@ class Game extends Component {
     return (
       <div>
         <Field field={field} />
-        <Button variant="contained" color="primary" onClick={this.solverNextStep}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => console.log('Pressed Next')}
+        >
           Next
         </Button>
       </div>
