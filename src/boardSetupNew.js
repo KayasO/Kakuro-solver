@@ -1,5 +1,5 @@
-import { Entry } from './Entry'
-import { WhiteCell } from './WhiteCell'
+import { Entry } from './entry'
+import { WhiteCell } from './whiteCell'
 
 
 export function EASY_EXAMPLE() {

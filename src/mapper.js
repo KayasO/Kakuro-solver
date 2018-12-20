@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
-import { WhiteCell } from './WhiteCell';
-import { Entry } from './Entry';
+import { WhiteCell } from './whiteCell';
+import { Entry } from './entry';
 
 
 export function mapToLists(input) {
