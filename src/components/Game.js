@@ -1,54 +1,73 @@
 import React, { Component } from 'react'
-import { Button } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 import _ from 'lodash'
 
-
 import Field from './Field'
+import ExplanationList from './ExplanationList'
 import { mapToLists, mapToSimpleList } from './../mapper'
-import { EXPERT_9x17 } from './../boardSetupNew'
+import { CHALLENGING_4x4 } from './../boardSetupNew'
 import solve from './../solver'
 
 class Game extends Component {
   state = {
     boardSetup: [],
     field: [],
-    solutionList: []
+    solutionEvents: [],
+    explanationList: [],
   }
 
   componentDidMount() {
-    const boardSetup = EXPERT_9x17()
+    const boardSetup = CHALLENGING_4x4()
     this.setState({
       field: mapToSimpleList(boardSetup),
-      solutionList: solve(mapToLists(boardSetup)),
-      boardSetup
+      solutionEvents: solve(mapToLists(boardSetup)),
+      boardSetup,
     })
   }
 
   solverNextStep = () => {
-    const { boardSetup, field, solutionList } = this.state
+    const { boardSetup, field, solutionEvents } = this.state
 
     boardSetup.forEach((row, i) => {
       row.forEach((cell, j) => {
-        if (solutionList[0] === cell) {
-          field[i][j].value = solutionList[0].value
+        if (solutionEvents[0] && solutionEvents[0].cell === cell) {
+          field[i][j].value = solutionEvents[0].cell.value
         }
       })
     })
 
     this.setState({
-      solutionList: _.drop(solutionList)
+      explanationList: solutionEvents[0]
+        ? [...this.state.explanationList, solutionEvents[0]]
+        : this.state.explanationList,
+      solutionEvents: _.drop(solutionEvents),
     })
   }
 
   render() {
-    const { field } = this.state
+    const { field, explanationList } = this.state
     return (
-      <div>
-        <Field field={field} />
-        <Button variant="contained" color="primary" onClick={this.solverNextStep}>
-          Next
-        </Button>
-      </div>
+      <Grid container>
+        <Grid item xs={6}>
+          <Typography variant="title" gutterBottom>
+            Kakuro
+          </Typography>
+          <Field field={field} />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.solverNextStep}
+          >
+            Next
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="title" gutterBottom>
+            Explanation List
+          </Typography>
+          <ExplanationList explanationList={explanationList} />
+        </Grid>
+      </Grid>
     )
   }
 }
