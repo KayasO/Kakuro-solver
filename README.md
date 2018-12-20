@@ -1,5 +1,7 @@
 # Kakuro solver
 
+This is my take on a Kakuro desktop application in Electron.
+
 In the project directory, you can run:
 
 ### `npm start`
