@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Button } from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 import _ from 'lodash'
 
 import Field from './Field'
+import ExplanationList from './ExplanationList'
 import { mapToLists, mapToSimpleList } from './../mapper'
 import { EASY_EXAMPLE } from './../boardSetupNew'
 import solve from './../solver'
@@ -16,14 +17,11 @@ class Game extends Component {
 
   componentDidMount() {
     const boardSetup = EASY_EXAMPLE()
-    this.setState(
-      {
-        field: mapToSimpleList(boardSetup),
-        solutionEvents: solve(mapToLists(boardSetup)),
-        boardSetup,
-      },
-      () => console.log(this.state.solutionEvents)
-    )
+    this.setState({
+      field: mapToSimpleList(boardSetup),
+      solutionEvents: solve(mapToLists(boardSetup)),
+      boardSetup,
+    })
   }
 
   solverNextStep = () => {
@@ -43,18 +41,23 @@ class Game extends Component {
   }
 
   render() {
-    const { field } = this.state
+    const { field, solutionEvents } = this.state
     return (
-      <div>
-        <Field field={field} />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => console.log('Pressed Next')}
-        >
-          Next
-        </Button>
-      </div>
+      <Grid container>
+        <Grid item xs={6}>
+          <Field field={field} />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => console.log('Pressed Next')}
+          >
+            Next
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <ExplanationList explanationList={solutionEvents} />
+        </Grid>
+      </Grid>
     )
   }
 }
