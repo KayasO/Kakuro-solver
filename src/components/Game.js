@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Grid } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 import _ from 'lodash'
 
 import Field from './Field'
@@ -49,6 +49,9 @@ class Game extends Component {
     return (
       <Grid container>
         <Grid item xs={6}>
+          <Typography variant="title" gutterBottom>
+            Kakuro
+          </Typography>
           <Field field={field} />
           <Button
             variant="contained"
@@ -59,6 +62,9 @@ class Game extends Component {
           </Button>
         </Grid>
         <Grid item xs={6}>
+          <Typography variant="title" gutterBottom>
+            Explanation List
+          </Typography>
           <ExplanationList explanationList={explanationList} />
         </Grid>
       </Grid>
