@@ -269,7 +269,7 @@ function guessNumber() {
         solutionEvents.push({
           cell: wCell,
           notesBefore,
-          description: 'choosing random possible solution',
+          description: 'random',
         })
         return
       }
