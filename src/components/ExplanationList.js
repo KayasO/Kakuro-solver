@@ -1,11 +1,12 @@
 import React from 'react'
 import { List, ListItem, Typography } from '@material-ui/core'
+import { lightGreen } from '@material-ui/core/colors'
 import { withNamespaces } from 'react-i18next'
 import styled from 'styled-components'
 import _ from 'lodash'
 
 const LastItem = styled(ListItem)`
-  background-color: lime;
+  background-color: ${lightGreen['A400']};
 `
 
 export default withNamespaces()(props => {
@@ -22,7 +23,7 @@ export default withNamespaces()(props => {
           ) : (
             <LastItem>
               <Typography variant="body1">
-                {i + 1}.{' '}
+                {`${i + 1}. `}
                 {t(`explanations.${explanation.type}`, { explanation })}
               </Typography>
             </LastItem>

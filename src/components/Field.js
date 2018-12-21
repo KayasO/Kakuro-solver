@@ -14,7 +14,7 @@ const styles = theme => ({
   },
   tableCell: {
     border: '2px solid grey',
-  }
+  },
 })
 
 // TODO: Probably doesn't need any Logic
@@ -25,19 +25,21 @@ class Field extends Component {
     return (
       <Table className={classes.table} padding="dense">
         <TableBody>
-          {
-            _.map(field, (row, i) =>
-              <TableRow key={i}>
-                {
-                  _.map(row, cell => {
-                    return cell.value >= 0 ? 
-                      <Cell classes={classes} value={cell.value} /> :
-                      <EntryCell classes={classes} below={cell.sumV} right={cell.sumH} />
-                  })
-                }
-              </TableRow>
-            )
-          }
+          {_.map(field, (row, i) => (
+            <TableRow key={i}>
+              {_.map(row, cell => {
+                return cell.value >= 0 ? (
+                  <Cell classes={classes} value={cell.value} />
+                ) : (
+                  <EntryCell
+                    classes={classes}
+                    below={cell.sumV}
+                    right={cell.sumH}
+                  />
+                )
+              })}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     )
