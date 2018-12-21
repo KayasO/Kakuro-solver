@@ -1,6 +1,7 @@
 {
   "explanations": {
     "only": "Die einzige mögliche Lösung ist {{ explanation.cell.value }}",
-    "random": "Es kann keine eindeutige Lösung ermittelt werden. Mögliche Lösungen wären [{{ explanation.possibleSolutions }}]. Zuffälig die Zahl {{ explanation.cell.value }} gewählt."
+    "random": "Es kann keine eindeutige Lösung ermittelt werden. Mögliche Lösungen wären [{{ explanation.possibleSolutions }}]. Zuffälig die Zahl {{ explanation.cell.value }} gewählt.",
+    "solved": "Mögliche Lösungen für diese Zelle wären [{{ explanation.notesBefore }}]. Die einzigen Werte, die in für die Zelle in Fragen kommen sind [{{ explanation.possibleSolutions }}]. Daher ist die Lösung {{ explanation.cell.value }}."
   }
 }

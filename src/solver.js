@@ -151,7 +151,7 @@ function checkPossibleSolutions() {
                 cell,
                 notesBefore: cell.notes,
                 possibleSolutions: wCell.notes,
-                type: 'Cell was solved => this cell can be solved',
+                type: 'solved',
               }
 
               cell.notes = _.difference(cell.notes, wCell.notes)
@@ -170,7 +170,7 @@ function checkPossibleSolutions() {
                   cell,
                   notesBefore: cell.notes,
                   possibleSolutions: wCell.notes,
-                  type: 'Cell was solved => this cell can be solved',
+                  type: 'solved',
                 }
 
                 cell.notes = _.difference(cell.notes, wCell.notes)
@@ -197,7 +197,7 @@ function checkPossibleSolutions() {
                 cell,
                 notesBefore: cell.notes,
                 possibleSolutions: wCell.notes,
-                type: 'Cell was solved => this cell can be solved',
+                type: 'solved',
               }
 
               cell.notes = _.difference(cell.notes, wCell.notes)
@@ -216,7 +216,7 @@ function checkPossibleSolutions() {
                   cell,
                   notesBefore: cell.notes,
                   possibleSolutions: wCell.notes,
-                  type: 'Cell was solved => this cell can be solved',
+                  type: 'solved',
                 }
 
                 cell.notes = _.difference(cell.notes, wCell.notes)

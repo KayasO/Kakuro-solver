@@ -1,6 +1,7 @@
 {
   "explanations": {
     "only": "The only possible solution is {{ explanation.cell.value }}",
-    "random": "The definite solution for this cell couldn't be determined. Possible solutions would be [{{ explanation.possibleSolutions }}]. Picked random solution {{ explanation.cell.value }}."
+    "random": "The definite solution for this cell couldn't be determined. Possible solutions would be [{{ explanation.possibleSolutions }}]. Picked random solution {{ explanation.cell.value }}.",
+    "solved": "Possible solutions for this cell could have been [{{ explanation.notesBefore }}]. The only numbers that can go into this cell are [{{ explanation.possibleSolutions }}]. Therefore the solution is {{ explanation.cell.value }}."
   }
 }
