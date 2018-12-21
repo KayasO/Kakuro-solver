@@ -7,7 +7,7 @@ import _ from 'lodash'
 
 const ExplanationList = styled(List)`
   div:nth-child(2n + 1) {
-    background-color: ${grey[100]};
+    background-color: ${grey[300]};
   }
 `
 
