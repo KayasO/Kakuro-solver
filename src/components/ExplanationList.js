@@ -13,19 +13,20 @@ export default withNamespaces()(props => {
 
   return (
     <List>
-      {_.map(_.reverse(explanationList), (explanation, i) =>
-        i === 0 ? (
-          <LastItem>
-            <Typography variant="subheading">
-              {explanationList.length - i}.
-              {t(`explanations.${explanation.type}`, { explanation })}
-            </Typography>
-          </LastItem>
-        ) : (
-          <ListItem>
-            {explanationList.length - i}.
-            {t(`explanations.${explanation.type}`, { explanation })}
-          </ListItem>
+      {_.reverse(
+        _.map(explanationList, (explanation, i) =>
+          i < explanationList.length - 1 ? (
+            <ListItem>
+              {i + 1}. {t(`explanations.${explanation.type}`, { explanation })}
+            </ListItem>
+          ) : (
+            <LastItem>
+              <Typography variant="body1">
+                {i + 1}.{' '}
+                {t(`explanations.${explanation.type}`, { explanation })}
+              </Typography>
+            </LastItem>
+          )
         )
       )}
     </List>
