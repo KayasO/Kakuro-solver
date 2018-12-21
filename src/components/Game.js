@@ -30,15 +30,12 @@ class Game extends Component {
   solverNextStep = () => {
     const { boardSetup, field, solutionEvents } = this.state
 
-    boardSetup.forEach((row, i) => {
-      row.forEach((cell, j) => {
+    boardSetup.forEach((row, x) => {
+      row.forEach((cell, y) => {
         if (solutionEvents[0].cell === cell) {
-          field[i][j].value = solutionEvents[0].cell.value
+          field[x][y].value = solutionEvents[0].cell.value
           this.setState({
-            prevFieldSolutions: [
-              ...this.state.prevFieldSolutions,
-              { x: i, y: j },
-            ],
+            prevFieldSolutions: [...this.state.prevFieldSolutions, { x, y }],
           })
         }
       })
