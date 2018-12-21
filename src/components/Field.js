@@ -33,8 +33,8 @@ class Field extends Component {
                 ) : (
                   <EntryCell
                     classes={classes}
-                    below={cell.sumV}
-                    right={cell.sumH}
+                    vertical={cell.sumV}
+                    horizontal={cell.sumH}
                   />
                 )
               })}
