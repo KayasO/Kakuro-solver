@@ -30,22 +30,24 @@ class Game extends Component {
 
     boardSetup.forEach((row, i) => {
       row.forEach((cell, j) => {
-        if (solutionEvents[0] && solutionEvents[0].cell === cell) {
+        if (solutionEvents[0].cell === cell) {
           field[i][j].value = solutionEvents[0].cell.value
         }
       })
     })
 
     this.setState({
-      explanationList: solutionEvents[0]
-        ? [...this.state.explanationList, solutionEvents[0]]
-        : this.state.explanationList,
+      explanationList: [...this.state.explanationList, solutionEvents[0]],
       solutionEvents: _.drop(solutionEvents),
     })
   }
 
+  solverPrevStep = () => {
+    console.log('solverPrevStep')
+  }
+
   render() {
-    const { field, explanationList } = this.state
+    const { explanationList, field, solutionEvents } = this.state
     return (
       <Grid container>
         <Grid item xs={6}>
@@ -55,8 +57,17 @@ class Game extends Component {
           <Field field={field} />
           <Button
             variant="contained"
+            color="secondary"
+            onClick={this.solverPrevStep}
+            // TODO: disabled
+          >
+            Prev
+          </Button>
+          <Button
+            variant="contained"
             color="primary"
             onClick={this.solverNextStep}
+            disabled={!solutionEvents.length}
           >
             Next
           </Button>
