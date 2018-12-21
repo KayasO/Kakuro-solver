@@ -77,48 +77,60 @@ class Game extends Component {
       prevFieldSolutions,
       solutionEvents,
     } = this.state
+
     return (
-      <Grid container xs={12}>
-        <Grid container xs={6}>
-          <Grid item xs={12}>
-            <Typography variant="title" gutterBottom>
-              Kakuro
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Field field={field} />
-          </Grid>
-          <Grid container xs={12} spacing="8" justify="flex-end">
-            <Grid item>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={this.solverPrevStep}
-                disabled={!prevFieldSolutions.length}
-              >
-                Prev
-              </Button>
+      <Grid container>
+        <Grid item xs={6}>
+          <Grid container>
+            <Grid item xs={12}>
+              <Typography variant="title" gutterBottom>
+                Kakuro
+              </Typography>
             </Grid>
-            <Grid item>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.solverNextStep}
-                disabled={!solutionEvents.length}
-              >
-                Next
-              </Button>
+
+            <Grid item xs={12}>
+              <Field field={field} />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Grid container spacing="8" justify="flex-end">
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={this.solverPrevStep}
+                    disabled={!prevFieldSolutions.length}
+                  >
+                    Prev
+                  </Button>
+                </Grid>
+
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.solverNextStep}
+                    disabled={!solutionEvents.length}
+                  >
+                    Next
+                  </Button>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid container xs={6}>
-          <Grid item xs={12}>
-            <Typography variant="title" gutterBottom>
-              Explanation List
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <ExplanationList explanationList={explanationList} />
+
+        <Grid item xs={6}>
+          <Grid container>
+            <Grid item xs={12}>
+              <Typography variant="title" gutterBottom>
+                Explanation List
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <ExplanationList explanationList={explanationList} />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
