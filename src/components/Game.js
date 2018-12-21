@@ -5,7 +5,7 @@ import _ from 'lodash'
 import Field from './Field'
 import ExplanationList from './ExplanationList'
 import { mapToLists, mapToSimpleList } from './../mapper'
-import { CHALLENGING_4x4 } from './../boardSetupNew'
+import { CHALLENGING_4x4 } from '../boardSetup'
 import solve from './../solver'
 
 class Game extends Component {
