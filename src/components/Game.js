@@ -12,6 +12,8 @@ class Game extends Component {
   state = {
     boardSetup: [],
     field: [],
+    prevFieldSolutions: [],
+    prevSolutionEvents: [],
     solutionEvents: [],
     explanationList: [],
   }
@@ -32,22 +34,52 @@ class Game extends Component {
       row.forEach((cell, j) => {
         if (solutionEvents[0].cell === cell) {
           field[i][j].value = solutionEvents[0].cell.value
+          this.setState({
+            prevFieldSolutions: [
+              ...this.state.prevFieldSolutions,
+              { x: i, y: j },
+            ],
+          })
         }
       })
     })
 
     this.setState({
       explanationList: [...this.state.explanationList, solutionEvents[0]],
+      prevSolutionEvents: [...this.state.prevSolutionEvents, solutionEvents[0]],
       solutionEvents: _.drop(solutionEvents),
     })
   }
 
   solverPrevStep = () => {
-    console.log('solverPrevStep')
+    const {
+      field,
+      explanationList,
+      prevFieldSolutions,
+      prevSolutionEvents,
+    } = this.state
+
+    const lastSolvedCell = prevFieldSolutions[prevFieldSolutions.length - 1]
+    field[lastSolvedCell.x][lastSolvedCell.y].value = 0
+
+    this.setState({
+      solutionEvents: [
+        prevSolutionEvents[prevSolutionEvents.length - 1],
+        ...this.state.solutionEvents,
+      ],
+      prevFieldSolutions: _.dropRight(prevFieldSolutions),
+      prevSolutionEvents: _.dropRight(prevSolutionEvents),
+      explanationList: _.dropRight(explanationList),
+    })
   }
 
   render() {
-    const { explanationList, field, solutionEvents } = this.state
+    const {
+      explanationList,
+      field,
+      prevFieldSolutions,
+      solutionEvents,
+    } = this.state
     return (
       <Grid container>
         <Grid item xs={6}>
@@ -59,7 +91,7 @@ class Game extends Component {
             variant="contained"
             color="secondary"
             onClick={this.solverPrevStep}
-            // TODO: disabled
+            disabled={!prevFieldSolutions.length}
           >
             Prev
           </Button>
