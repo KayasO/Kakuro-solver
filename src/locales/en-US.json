@@ -1,6 +1,6 @@
 {
   "explanations": {
-    "only": "Einzige Zahl",
-    "random": "Chose a random number."
+    "only": "The only possible solution is {{ explanation.cell.value }}",
+    "random": "The definite solution for this cell couldn't be determined. Possible solutions would be [{{ explanation.possibleSolutions }}]. Picked random solution {{ explanation.cell.value }}."
   }
 }

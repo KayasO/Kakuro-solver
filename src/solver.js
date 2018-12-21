@@ -28,7 +28,7 @@ function calcPossibleSolutions(wCells, solutionSets) {
       cell: wCell,
       notesBefore: wCell.notes,
       possibleSolutions,
-      description: 'only',
+      type: 'only',
     }
 
     wCell.notes = _.intersection(wCell.notes, possibleSolutions)
@@ -52,7 +52,7 @@ function updateNotesWithSets() {
           cell: wCell,
           notesBefore: wCell.notes,
           possibleSolutions: unionSets,
-          description: 'intersection notes with unionSets',
+          type: 'intersection notes with unionSets',
         }
 
         wCell.notes = _.intersection(wCell.notes, unionSets)
@@ -75,7 +75,7 @@ function updateNotesWithSets() {
           cell: wCell,
           notesBefore: wCell.notes,
           possibleSolutions: unionSets,
-          description: 'intersection notes with unionSets',
+          type: 'intersection notes with unionSets',
         }
 
         wCell.notes = _.intersection(wCell.notes, unionSets)
@@ -151,7 +151,7 @@ function checkPossibleSolutions() {
                 cell,
                 notesBefore: cell.notes,
                 possibleSolutions: wCell.notes,
-                description: 'Cell was solved => this cell can be solved',
+                type: 'Cell was solved => this cell can be solved',
               }
 
               cell.notes = _.difference(cell.notes, wCell.notes)
@@ -170,7 +170,7 @@ function checkPossibleSolutions() {
                   cell,
                   notesBefore: cell.notes,
                   possibleSolutions: wCell.notes,
-                  description: 'Cell was solved => this cell can be solved',
+                  type: 'Cell was solved => this cell can be solved',
                 }
 
                 cell.notes = _.difference(cell.notes, wCell.notes)
@@ -197,7 +197,7 @@ function checkPossibleSolutions() {
                 cell,
                 notesBefore: cell.notes,
                 possibleSolutions: wCell.notes,
-                description: 'Cell was solved => this cell can be solved',
+                type: 'Cell was solved => this cell can be solved',
               }
 
               cell.notes = _.difference(cell.notes, wCell.notes)
@@ -216,7 +216,7 @@ function checkPossibleSolutions() {
                   cell,
                   notesBefore: cell.notes,
                   possibleSolutions: wCell.notes,
-                  description: 'Cell was solved => this cell can be solved',
+                  type: 'Cell was solved => this cell can be solved',
                 }
 
                 cell.notes = _.difference(cell.notes, wCell.notes)
@@ -269,7 +269,7 @@ function guessNumber() {
         solutionEvents.push({
           cell: wCell,
           notesBefore,
-          description: 'random',
+          type: 'random',
         })
         return
       }

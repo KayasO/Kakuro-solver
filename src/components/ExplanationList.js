@@ -18,13 +18,13 @@ export default withNamespaces()(props => {
           <LastItem>
             <Typography variant="subheading">
               {explanationList.length - i}.
-              {t(`explanations.${explanation.description}`)}
+              {t(`explanations.${explanation.type}`, { explanation })}
             </Typography>
           </LastItem>
         ) : (
           <ListItem>
             {explanationList.length - i}.
-            {t(`explanations.${explanation.description}`)}
+            {t(`explanations.${explanation.type}`, { explanation })}
           </ListItem>
         )
       )}
