@@ -3,7 +3,7 @@ import { Table, TableBody, TableRow } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import _ from 'lodash'
 
-import Cell from './Cell'
+import Cell from './WhiteCell'
 import EntryCell from './EntryCell'
 
 const styles = theme => ({
@@ -29,7 +29,7 @@ class Field extends Component {
             <TableRow key={i}>
               {_.map(row, cell => {
                 return cell.value >= 0 ? (
-                  <Cell classes={classes} value={cell.value} />
+                  <Cell classes={classes} solution={cell.value} />
                 ) : (
                   <EntryCell
                     classes={classes}
