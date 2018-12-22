@@ -11,7 +11,7 @@ import solve from './../solver'
 class Game extends Component {
   state = {
     boardSetup: [],
-    field: [],
+    solvedField: [],
     prevFieldSolutions: [],
     prevSolutionEvents: [],
     solutionEvents: [],
@@ -21,19 +21,19 @@ class Game extends Component {
   componentDidMount() {
     const boardSetup = CHALLENGING_4x4()
     this.setState({
-      field: mapToSimpleList(boardSetup),
+      solvedField: mapToSimpleList(boardSetup),
       solutionEvents: solve(mapToLists(boardSetup)),
       boardSetup,
     })
   }
 
   solverNextStep = () => {
-    const { boardSetup, field, solutionEvents } = this.state
+    const { boardSetup, solvedField, solutionEvents } = this.state
 
     boardSetup.forEach((row, x) => {
       row.forEach((cell, y) => {
         if (solutionEvents[0].cell === cell) {
-          field[x][y].value = solutionEvents[0].cell.value
+          solvedField[x][y].value = solutionEvents[0].cell.value
           this.setState({
             prevFieldSolutions: [...this.state.prevFieldSolutions, { x, y }],
           })
@@ -50,14 +50,14 @@ class Game extends Component {
 
   solverPrevStep = () => {
     const {
-      field,
+      solvedField,
       explanationList,
       prevFieldSolutions,
       prevSolutionEvents,
     } = this.state
 
     const lastSolvedCell = prevFieldSolutions[prevFieldSolutions.length - 1]
-    field[lastSolvedCell.x][lastSolvedCell.y].value = 0
+    solvedField[lastSolvedCell.x][lastSolvedCell.y].value = 0
 
     this.setState({
       solutionEvents: [
@@ -73,7 +73,7 @@ class Game extends Component {
   render() {
     const {
       explanationList,
-      field,
+      solvedField,
       prevFieldSolutions,
       solutionEvents,
     } = this.state
@@ -83,13 +83,13 @@ class Game extends Component {
         <Grid item xs={6}>
           <Grid container>
             <Grid item xs={12}>
-              <Typography variant="title" gutterBottom>
+              <Typography variant="display1" gutterBottom>
                 Kakuro
               </Typography>
             </Grid>
 
             <Grid item xs={12}>
-              <Field field={field} />
+              <Field field={solvedField} />
             </Grid>
 
             <Grid item xs={12}>
@@ -123,7 +123,7 @@ class Game extends Component {
         <Grid item xs={6}>
           <Grid container>
             <Grid item xs={12}>
-              <Typography variant="title" gutterBottom>
+              <Typography variant="display1" gutterBottom>
                 Explanation List
               </Typography>
             </Grid>
