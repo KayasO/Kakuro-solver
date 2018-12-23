@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import { TableCell, Input } from '@material-ui/core'
-import { lightGreen, indigo } from '@material-ui/core/colors'
+import { lightGreen, indigo, red } from '@material-ui/core/colors'
 import styled from 'styled-components'
 
 const Cell = styled(TableCell)`
-  background-color: ${props => (props.solved ? lightGreen['A400'] : 'white')};
+  background-color: ${props =>
+    props.showSolution
+      ? props.solved
+        ? lightGreen['A400']
+        : 'white'
+      : props.isFalse
+      ? red[500]
+      : 'white'};
   color: ${indigo[500]} !important;
 
   padding: 0 !important;
@@ -24,22 +31,30 @@ class WhiteCell extends Component {
   }
 
   change = event => {
+    const { cell } = this.props.solution
+    cell.value = +event.target.value[0]
     this.setState({
       value: event.target.value[0],
     })
   }
 
   render() {
-    const { classes, solution } = this.props
+    const { classes, disabled, solution, showSolution } = this.props
     const { value } = this.state
 
     return (
-      <Cell className={classes.tableCell} solved={solution}>
+      <Cell
+        className={classes.tableCell}
+        showSolution={showSolution}
+        solved={solution.value || value}
+        isFalse={solution.isFalse}
+      >
         <Number
           type="text"
-          value={solution || value}
+          value={solution.value || value}
           onChange={this.change}
           disableUnderline
+          disabled={disabled}
         />
       </Cell>
     )

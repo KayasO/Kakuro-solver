@@ -1,11 +1,12 @@
 import _ from 'lodash'
 
-import { WhiteCell } from './whiteCell';
-import { Entry } from './entry';
-
+import { WhiteCell } from './whiteCell'
+import { Entry } from './entry'
 
 export function mapToLists(input) {
-  const allWhiteCells = _.flatten(input).filter(cell => cell instanceof WhiteCell)
+  const allWhiteCells = _.flatten(input).filter(
+    cell => cell instanceof WhiteCell
+  )
   let entries = []
 
   for (let x = 0; x < input.length; x++) {
@@ -15,7 +16,7 @@ export function mapToLists(input) {
         entries.push(entry)
 
         if (entry.sumH) {
-          for (let i = y+1; i < input.length; i++) {
+          for (let i = y + 1; i < input.length; i++) {
             const cell = input[x][i]
             if (cell instanceof WhiteCell) {
               entry.cellsH.push(cell)
@@ -27,7 +28,7 @@ export function mapToLists(input) {
           }
         }
         if (entry.sumV) {
-          for (let i = x+1; i < input.length; i++) {
+          for (let i = x + 1; i < input.length; i++) {
             const cell = input[i][y]
             if (cell instanceof WhiteCell) {
               entry.cellsV.push(cell)
@@ -44,23 +45,21 @@ export function mapToLists(input) {
 
   return {
     entries,
-    allWhiteCells
+    allWhiteCells,
   }
 }
 
 export function mapToSimpleList(input) {
   const list = []
-  for (let i = 0; i < input.length; i++)
-    list.push([])
+  for (let i = 0; i < input.length; i++) list.push([])
 
   for (let i = 0; i < input.length; i++) {
     for (let j = 0; j < input[0].length; j++) {
       const cell = input[i][j]
       if (cell instanceof Entry) {
-        list[i].push({sumH: cell.sumH, sumV: cell.sumV})
-      }
-      else if (cell instanceof WhiteCell) {
-        list[i].push({value: cell.value})
+        list[i].push({ sumH: cell.sumH, sumV: cell.sumV })
+      } else if (cell instanceof WhiteCell) {
+        list[i].push({ value: cell.value, isFalse: cell.isFalse, cell })
       } else {
         list[i].push({})
       }
