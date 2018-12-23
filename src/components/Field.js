@@ -33,7 +33,6 @@ class Field extends Component {
                     classes={classes}
                     solution={cell}
                     showSolution={showSolution}
-                    disabled={showSolution}
                   />
                 ) : (
                   <EntryCell

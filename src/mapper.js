@@ -59,7 +59,12 @@ export function mapToSimpleList(input) {
       if (cell instanceof Entry) {
         list[i].push({ sumH: cell.sumH, sumV: cell.sumV })
       } else if (cell instanceof WhiteCell) {
-        list[i].push({ value: cell.value, isFalse: cell.isFalse, cell })
+        list[i].push({
+          value: cell.value,
+          isFalse: cell.isFalse,
+          lastSolved: false,
+          cell,
+        })
       } else {
         list[i].push({})
       }

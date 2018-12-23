@@ -42,9 +42,12 @@ class Game extends Component {
       row.forEach((cell, y) => {
         if (solutionEvents[0].cell === cell) {
           solvedField[x][y].value = solutionEvents[0].cell.value
+          solvedField[x][y].lastSolved = true
           this.setState({
             prevFieldSolutions: [...this.state.prevFieldSolutions, { x, y }],
           })
+        } else {
+          solvedField[x][y].lastSolved = false
         }
       })
     })
@@ -66,6 +69,11 @@ class Game extends Component {
 
     const lastSolvedCell = prevFieldSolutions[prevFieldSolutions.length - 1]
     solvedField[lastSolvedCell.x][lastSolvedCell.y].value = 0
+    solvedField[lastSolvedCell.x][lastSolvedCell.y].lastSolved = false
+    if (prevFieldSolutions.length > 1) {
+      const prevSolvedCell = prevFieldSolutions[prevFieldSolutions.length - 2]
+      solvedField[prevSolvedCell.x][prevSolvedCell.y].lastSolved = true
+    }
 
     this.setState({
       solutionEvents: [
@@ -145,7 +153,7 @@ class Game extends Component {
                     variant="contained"
                     color="primary"
                     onClick={() => {
-                      this.setState({ showSolution: !this.state.showSolution })
+                      this.setState({ showSolution: true })
                     }}
                   >
                     Solution
