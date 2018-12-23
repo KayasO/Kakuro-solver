@@ -5,25 +5,33 @@ import _ from 'lodash'
 import Field from './Field'
 import ExplanationList from './ExplanationList'
 import { mapToLists, mapToSimpleList } from './../mapper'
-import { CHALLENGING_4x4 } from '../boardSetup'
+import { EASY_4x4 } from '../boardSetup'
 import solve from './../solver'
+import check from './../check'
 
 class Game extends Component {
   state = {
     boardSetup: [],
+    checkSetup: [],
+    checkField: [],
     solvedField: [],
     prevFieldSolutions: [],
     prevSolutionEvents: [],
     solutionEvents: [],
     explanationList: [],
+    showSolution: false,
   }
 
   componentDidMount() {
-    const boardSetup = CHALLENGING_4x4()
+    const boardSetup = EASY_4x4()
+    const checkSetup = EASY_4x4()
     this.setState({
+      checkField: mapToSimpleList(checkSetup),
       solvedField: mapToSimpleList(boardSetup),
       solutionEvents: solve(mapToLists(boardSetup)),
       boardSetup,
+      checkSetup,
+      check: check(checkSetup),
     })
   }
 
@@ -70,12 +78,37 @@ class Game extends Component {
     })
   }
 
+  checkBoard = () => {
+    this.setState(
+      {
+        checkField: mapToSimpleList(this.state.check()),
+      },
+      () => {
+        const { checkField } = this.state
+        let boardCorrect = true
+
+        checkField.forEach(row => {
+          row.forEach(cell => {
+            if (cell.isFalse) {
+              boardCorrect = false
+            }
+          })
+        })
+        this.setState({
+          showSolution: boardCorrect,
+        })
+      }
+    )
+  }
+
   render() {
     const {
+      checkField,
       explanationList,
       solvedField,
       prevFieldSolutions,
       solutionEvents,
+      showSolution,
     } = this.state
 
     return (
@@ -89,50 +122,81 @@ class Game extends Component {
             </Grid>
 
             <Grid item xs={12}>
-              <Field field={solvedField} />
-            </Grid>
-          </Grid>
-        </Grid>
-
-        <Grid item xs={6}>
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography variant="display1" gutterBottom>
-                Explanation List
-              </Typography>
+              <Field
+                field={showSolution ? solvedField : checkField}
+                showSolution={showSolution}
+              />
             </Grid>
 
             <Grid item xs={12}>
-              <Grid container spacing="8">
-                <Grid item>
+              <Grid container>
+                <Grid item xs={6}>
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={this.solverPrevStep}
-                    disabled={!prevFieldSolutions.length}
+                    onClick={this.checkBoard}
+                    disabled={showSolution}
                   >
-                    Prev
+                    Check
                   </Button>
                 </Grid>
-
-                <Grid item>
+                <Grid item xs={6}>
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={this.solverNextStep}
-                    disabled={!solutionEvents.length}
+                    onClick={() => {
+                      this.setState({ showSolution: !this.state.showSolution })
+                    }}
                   >
-                    Next
+                    Solution
                   </Button>
                 </Grid>
               </Grid>
             </Grid>
-
-            <Grid item xs={12} style={{ maxHeight: 400, overflow: 'auto' }}>
-              <ExplanationList explanationList={explanationList} />
-            </Grid>
           </Grid>
         </Grid>
+
+        {showSolution && (
+          <Grid item xs={6}>
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography variant="display1" gutterBottom>
+                  Explanation List
+                </Typography>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Grid container spacing="8">
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={this.solverPrevStep}
+                      disabled={!prevFieldSolutions.length}
+                    >
+                      Prev
+                    </Button>
+                  </Grid>
+
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={this.solverNextStep}
+                      disabled={!solutionEvents.length}
+                    >
+                      Next
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12} style={{ maxHeight: 400, overflow: 'auto' }}>
+                <ExplanationList explanationList={explanationList} />
+              </Grid>
+            </Grid>
+          </Grid>
+        )}
       </Grid>
     )
   }

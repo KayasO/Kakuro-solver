@@ -20,7 +20,7 @@ const styles = theme => ({
 // TODO: Probably doesn't need any Logic
 class Field extends Component {
   render() {
-    const { classes, field } = this.props
+    const { classes, field, showSolution } = this.props
 
     return (
       <Table className={classes.table} padding="dense">
@@ -29,7 +29,12 @@ class Field extends Component {
             <TableRow key={i}>
               {_.map(row, cell => {
                 return cell.value >= 0 ? (
-                  <Cell classes={classes} solution={cell.value} />
+                  <Cell
+                    classes={classes}
+                    solution={cell}
+                    showSolution={showSolution}
+                    disabled={showSolution}
+                  />
                 ) : (
                   <EntryCell
                     classes={classes}
