@@ -134,6 +134,7 @@ class Game extends Component {
                 field={showSolution ? solvedField : checkField}
                 showSolution={showSolution}
               />
+              <br />
             </Grid>
 
             <Grid item xs={12}>

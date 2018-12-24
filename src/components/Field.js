@@ -35,11 +35,7 @@ class Field extends Component {
                     showSolution={showSolution}
                   />
                 ) : (
-                  <EntryCell
-                    classes={classes}
-                    vertical={cell.sumV}
-                    horizontal={cell.sumH}
-                  />
+                  <EntryCell classes={classes} entry={cell} />
                 )
               })}
             </TableRow>
