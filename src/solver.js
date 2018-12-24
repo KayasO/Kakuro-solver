@@ -150,7 +150,7 @@ function checkPossibleSolutions() {
               let event = {
                 cell,
                 notesBefore: cell.notes,
-                possibleSolutions: wCell.notes,
+                cellSolution: wCell.notes,
                 type: 'solved',
               }
 
@@ -169,7 +169,7 @@ function checkPossibleSolutions() {
                 let event = {
                   cell,
                   notesBefore: cell.notes,
-                  possibleSolutions: wCell.notes,
+                  cellSolution: wCell.notes,
                   type: 'solved',
                 }
 
@@ -196,7 +196,7 @@ function checkPossibleSolutions() {
               let event = {
                 cell,
                 notesBefore: cell.notes,
-                possibleSolutions: wCell.notes,
+                cellSolution: wCell.notes,
                 type: 'solved',
               }
 
@@ -215,7 +215,7 @@ function checkPossibleSolutions() {
                 let event = {
                   cell,
                   notesBefore: cell.notes,
-                  possibleSolutions: wCell.notes,
+                  cellSolution: wCell.notes,
                   type: 'solved',
                 }
 
