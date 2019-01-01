@@ -2,9 +2,9 @@ import _ from 'lodash'
 
 import solutions from './solutions'
 
-let entries = []
-let allWhiteCells = []
-let solutionEvents = []
+let entries
+let allWhiteCells
+let solutionEvents
 
 function setupSolutionSets() {
   entries.forEach(entry => {
@@ -320,6 +320,10 @@ function setFirstIteration() {
 }
 
 export default fieldAsLists => {
+  entries = []
+  allWhiteCells = []
+  solutionEvents = []
+
   entries = fieldAsLists.entries
   allWhiteCells = fieldAsLists.allWhiteCells
 

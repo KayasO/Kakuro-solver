@@ -5,7 +5,12 @@ import _ from 'lodash'
 import Field from './Field'
 import ExplanationList from './ExplanationList'
 import { mapToLists, mapToSimpleList } from './../mapper'
-import { EASY_4x4 } from '../boardSetup'
+import {
+  EASY_EXAMPLE,
+  CHALLENGING_4x4,
+  EASY_6x6,
+  EXPERT_9x17,
+} from '../boardSetup'
 import solve from './../solver'
 import check from './../check'
 
@@ -23,8 +28,8 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    const boardSetup = EASY_4x4()
-    const checkSetup = EASY_4x4()
+    const boardSetup = EASY_EXAMPLE()
+    const checkSetup = EASY_EXAMPLE()
 
     this.setState({
       checkField: mapToSimpleList(checkSetup),
@@ -110,6 +115,24 @@ class Game extends Component {
     )
   }
 
+  changeField = fn => () => {
+    const boardSetup = fn()
+    const checkSetup = fn()
+
+    this.setState({
+      checkField: mapToSimpleList(checkSetup),
+      solvedField: mapToSimpleList(boardSetup),
+      solutionEvents: solve(mapToLists(boardSetup)),
+      boardSetup,
+      checkSetup,
+      check: check(checkSetup),
+      prevFieldSolutions: [],
+      prevSolutionEvents: [],
+      explanationList: [],
+      showSolution: false,
+    })
+  }
+
   render() {
     const {
       checkField,
@@ -119,7 +142,7 @@ class Game extends Component {
       solutionEvents,
       showSolution,
     } = this.state
-
+    console.log(this.state)
     return (
       <Grid container>
         <Grid item xs={6}>
@@ -128,6 +151,41 @@ class Game extends Component {
               <Typography variant="display1" gutterBottom>
                 Kakuro
               </Typography>
+            </Grid>
+
+            <Grid container>
+              <Grid item xs={3}>
+                <Button
+                  variant="contained"
+                  onClick={this.changeField(EASY_EXAMPLE)}
+                >
+                  EASY
+                </Button>
+              </Grid>
+              <Grid item xs={3}>
+                <Button
+                  variant="contained"
+                  onClick={this.changeField(CHALLENGING_4x4)}
+                >
+                  4X4
+                </Button>
+              </Grid>
+              <Grid item xs={3}>
+                <Button
+                  variant="contained"
+                  onClick={this.changeField(EASY_6x6)}
+                >
+                  6X6
+                </Button>
+              </Grid>
+              <Grid item xs={3}>
+                <Button
+                  variant="contained"
+                  onClick={this.changeField(EXPERT_9x17)}
+                >
+                  9x7
+                </Button>
+              </Grid>
             </Grid>
 
             <Grid item xs={12}>
