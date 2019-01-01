@@ -57,7 +57,12 @@ export function mapToSimpleList(input) {
     for (let j = 0; j < input[0].length; j++) {
       const cell = input[i][j]
       if (cell instanceof Entry) {
-        list[i].push({ sumH: cell.sumH, sumV: cell.sumV })
+        list[i].push({
+          sumH: cell.sumH,
+          sumV: cell.sumV,
+          inH: cell.cellsH.length,
+          inV: cell.cellsV.length,
+        })
       } else if (cell instanceof WhiteCell) {
         list[i].push({
           value: cell.value,
