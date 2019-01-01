@@ -2,7 +2,6 @@ import React from 'react'
 import { TableCell } from '@material-ui/core'
 import { grey } from '@material-ui/core/colors'
 import styled from 'styled-components'
-import _ from 'lodash'
 
 import img from '../resources/line_45_007_black.png'
 

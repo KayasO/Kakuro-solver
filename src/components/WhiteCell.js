@@ -9,7 +9,7 @@ const Cell = styled(TableCell)`
       if (props.lastSolved) {
         return lightGreen['A400']
       } else if (props.solved) {
-        return lightGreen['A100']
+        return lightGreen['A200']
       }
     } else if (props.isFalse) {
       return red[500]
@@ -52,7 +52,7 @@ class WhiteCell extends Component {
         className={classes.tableCell}
         showSolution={showSolution}
         lastSolved={solution.lastSolved}
-        solved={solution.value}
+        solved={solution.value || value}
         isFalse={solution.isFalse}
       >
         <Number
