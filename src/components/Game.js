@@ -25,7 +25,7 @@ class Game extends Component {
   componentDidMount() {
     const boardSetup = EASY_4x4()
     const checkSetup = EASY_4x4()
-    mapToLists(checkSetup)
+
     this.setState({
       checkField: mapToSimpleList(checkSetup),
       solvedField: mapToSimpleList(boardSetup),

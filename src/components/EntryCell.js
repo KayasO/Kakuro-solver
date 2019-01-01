@@ -1,11 +1,10 @@
 import React from 'react'
-import { TableCell, Tooltip } from '@material-ui/core'
+import { TableCell } from '@material-ui/core'
 import { grey } from '@material-ui/core/colors'
 import styled from 'styled-components'
 import _ from 'lodash'
 
 import img from '../resources/line_45_007_black.png'
-import solutions from '../solutions'
 
 const EntryCell = styled(TableCell)`
   background-color: ${grey[400]};
@@ -36,21 +35,9 @@ const TopRight = styled.span`
 
 export default ({ classes, entry }) => {
   return (
-    <Tooltip
-      title={`Horizontal: [${_.map(
-        solutions[entry.sumH][entry.inH],
-        set => `[${set}]`
-      )}]
-      Vertical: [${_.map(
-        solutions[entry.sumV][entry.inV],
-        set => `[${set}]`
-      )}]`}
-      placement="right"
-    >
-      <EntryCell className={classes.tableCell}>
-        <BottomLeft>{entry.sumV}</BottomLeft>
-        <TopRight>{entry.sumH}</TopRight>
-      </EntryCell>
-    </Tooltip>
+    <EntryCell className={classes.tableCell}>
+      <BottomLeft>{entry.sumV}</BottomLeft>
+      <TopRight>{entry.sumH}</TopRight>
+    </EntryCell>
   )
 }
