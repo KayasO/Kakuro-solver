@@ -3,6 +3,7 @@ import { grey } from '@material-ui/core/colors'
 import { createGlobalStyle } from 'styled-components'
 import 'typeface-roboto'
 
+import { EASY_EXAMPLE } from './boardSetup'
 import Game from './components/Game'
 import EndDialog from './components/EndDialog'
 
@@ -14,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
 
 class App extends Component {
   state = {
+    difficulty: EASY_EXAMPLE,
     gameWon: false,
   }
 
@@ -23,12 +25,21 @@ class App extends Component {
     })
   }
 
+  changeDifficulty = difficulty => () =>
+    this.setState({
+      difficulty,
+    })
+
   render() {
-    const { gameWon } = this.state
+    const { difficulty, gameWon } = this.state
 
     return (
       <div className="App">
-        <Game openWonDialog={this.openWonDialog} />
+        <Game
+          difficulty={difficulty}
+          openWonDialog={this.openWonDialog}
+          changeDifficulty={this.changeDifficulty}
+        />
         <EndDialog open={gameWon} />
         <GlobalStyle />
       </div>
