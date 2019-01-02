@@ -149,7 +149,7 @@ class MainWindow extends Component {
     return (
       <Grid container>
         <Grid item xs={6}>
-          <Grid container>
+          <Grid container spacing="16">
             <Grid item xs={12}>
               <Typography variant="display1" gutterBottom>
                 Kakuro
@@ -161,7 +161,6 @@ class MainWindow extends Component {
                 field={showSolution ? solvedField : checkField}
                 showSolution={showSolution}
               />
-              <br />
             </Grid>
 
             <Grid item xs={12}>

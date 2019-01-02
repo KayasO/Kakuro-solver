@@ -1,23 +1,30 @@
-import React, { Component, Fragment } from 'react'
-import { Grid, Button } from '@material-ui/core'
+import React, { Component } from 'react'
+import { Grid, Button, Typography } from '@material-ui/core'
 
 import DifficultySelector from './DifficultySelector'
 
 class StartMenu extends Component {
   render() {
     const { changeDifficulty } = this.props
+
     return (
-      <Grid container>
-        <Grid item xs={12}>
-          <h1>Start Menu</h1>
+      <Grid container direction="column" alignItems="center" spacing="40">
+        <Grid item>
+          <Typography variant="display1">Start Menu</Typography>
         </Grid>
-        <Grid item xs={6}>
-          <DifficultySelector changeDifficulty={changeDifficulty} />
-        </Grid>
-        <Grid item xs={6}>
-          <Button variant="contained" color="primary">
-            Start
-          </Button>
+
+        <Grid item>
+          <Grid container spacing="40">
+            <Grid item>
+              <DifficultySelector changeDifficulty={changeDifficulty} />
+            </Grid>
+
+            <Grid item>
+              <Button variant="contained" color="primary">
+                Start
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     )
