@@ -1,5 +1,5 @@
 {
-  "name": "Kakuro-solver",
+  "name": "kakuro-solver",
   "version": "0.1.0",
   "private": true,
   "description": "Kakuro solver",
