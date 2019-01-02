@@ -25,7 +25,7 @@ class App extends Component {
     })
   }
 
-  changeDifficulty = difficulty => () =>
+  changeDifficulty = difficulty =>
     this.setState({
       difficulty,
     })
@@ -40,7 +40,7 @@ class App extends Component {
           openWonDialog={this.openWonDialog}
           changeDifficulty={this.changeDifficulty}
         />
-        <EndDialog open={gameWon} />
+        <EndDialog open={gameWon} changeDifficulty={this.changeDifficulty} />
         <GlobalStyle />
       </div>
     )

@@ -8,6 +8,7 @@ import { mapToLists, mapToSimpleList } from './../mapper'
 import solve from './../solver'
 import check from './../check'
 import { CHALLENGING_4x4 } from './../boardSetup'
+import DifficultyPicker from './DifficultyPicker'
 
 class Game extends Component {
   state = {
@@ -138,7 +139,6 @@ class Game extends Component {
   }
 
   render() {
-    const { changeDifficulty } = this.props
     const {
       checkField,
       explanationList,
@@ -160,12 +160,9 @@ class Game extends Component {
 
             <Grid container>
               <Grid item xs={3}>
-                <Button
-                  variant="contained"
-                  onClick={changeDifficulty(CHALLENGING_4x4)}
-                >
-                  CHALLENGE_4X4
-                </Button>
+                <DifficultyPicker
+                  changeDifficulty={this.props.changeDifficulty}
+                />
               </Grid>
             </Grid>
 
