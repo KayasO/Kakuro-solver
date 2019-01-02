@@ -151,7 +151,7 @@ class MainWindow extends Component {
         <Grid item xs={6}>
           <Grid container spacing="16">
             <Grid item xs={12}>
-              <Typography variant="display1" gutterBottom>
+              <Typography variant="h4" gutterBottom>
                 Kakuro
               </Typography>
             </Grid>
@@ -195,7 +195,7 @@ class MainWindow extends Component {
           <Grid item xs={6}>
             <Grid container>
               <Grid item xs={12}>
-                <Typography variant="display1" gutterBottom>
+                <Typography variant="h4" gutterBottom>
                   Explanation List
                 </Typography>
               </Grid>

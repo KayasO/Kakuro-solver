@@ -1,28 +1,52 @@
 import React, { Component } from 'react'
-import { Grid, Button, Typography } from '@material-ui/core'
-
-import DifficultySelector from './DifficultySelector'
+import { Link } from 'react-router-dom'
+import { Grid, Typography } from '@material-ui/core'
 
 class StartMenu extends Component {
   render() {
-    const { changeDifficulty } = this.props
-
     return (
       <Grid container direction="column" alignItems="center" spacing="40">
         <Grid item>
-          <Typography variant="display1">Start Menu</Typography>
+          <Typography variant="h4">Start Menu</Typography>
         </Grid>
 
         <Grid item>
-          <Grid container spacing="40">
+          <Grid container>
             <Grid item>
-              <DifficultySelector changeDifficulty={changeDifficulty} />
+              <Grid container spacing="16">
+                <Grid item xs={12}>
+                  <Typography variant="h5">4 X 4</Typography>
+                </Grid>
+
+                <Grid item>
+                  <Link to="/game">
+                    <Typography variant="body1">Easy</Typography>
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link to="/game">
+                    <Typography variant="body1">Challenging</Typography>
+                  </Link>
+                </Grid>
+              </Grid>
             </Grid>
 
             <Grid item>
-              <Button variant="contained" color="primary">
-                Start
-              </Button>
+              <Grid container spacing="16">
+                <Grid item xs={12}>
+                  <Typography variant="h5">6 X 6</Typography>
+                </Grid>
+                <Grid item>
+                  <Link to="/game">
+                    <Typography variant="body1">Easy</Typography>
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link to="/game">
+                    <Typography variant="body1">Challenging</Typography>
+                  </Link>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
