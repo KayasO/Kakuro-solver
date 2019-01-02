@@ -108,6 +108,9 @@ class Game extends Component {
             }
           })
         })
+        if (boardCorrect) {
+          this.props.openWonDialog()
+        }
         this.setState({
           showSolution: boardCorrect,
         })
@@ -142,7 +145,7 @@ class Game extends Component {
       solutionEvents,
       showSolution,
     } = this.state
-    console.log(this.state)
+
     return (
       <Grid container>
         <Grid item xs={6}>
