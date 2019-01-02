@@ -4,13 +4,11 @@ import _ from 'lodash'
 
 import Field from './Field'
 import ExplanationList from './ExplanationList'
-import { mapToLists, mapToSimpleList } from './../mapper'
-import solve from './../solver'
-import check from './../check'
-import { CHALLENGING_4x4 } from './../boardSetup'
-import DifficultyPicker from './DifficultyPicker'
+import { mapToLists, mapToSimpleList } from '../mapper'
+import solve from '../solver'
+import check from '../check'
 
-class Game extends Component {
+class MainWindow extends Component {
   state = {
     boardSetup: [],
     checkSetup: [],
@@ -158,14 +156,6 @@ class Game extends Component {
               </Typography>
             </Grid>
 
-            <Grid container>
-              <Grid item xs={3}>
-                <DifficultyPicker
-                  changeDifficulty={this.props.changeDifficulty}
-                />
-              </Grid>
-            </Grid>
-
             <Grid item xs={12}>
               <Field
                 field={showSolution ? solvedField : checkField}
@@ -248,4 +238,4 @@ class Game extends Component {
   }
 }
 
-export default Game
+export default MainWindow

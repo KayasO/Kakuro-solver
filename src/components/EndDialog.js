@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Dialog, DialogTitle } from '@material-ui/core'
+import { Dialog, DialogTitle } from '@material-ui/core'
 
 export default props => {
   return (
