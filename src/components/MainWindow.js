@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Grid, Typography } from '@material-ui/core'
+import { green } from '@material-ui/core/colors'
+import styled from 'styled-components'
 import _ from 'lodash'
 
 import Field from './Field'
@@ -7,6 +9,11 @@ import ExplanationList from './ExplanationList'
 import { mapToLists, mapToSimpleList } from '../mapper'
 import solve from '../solver'
 import check from '../check'
+
+const FinishButton = styled(Button)`
+  background-color: ${`${green[500]} !important`};
+  color: white !important;
+`
 
 class MainWindow extends Component {
   state = {
@@ -137,6 +144,7 @@ class MainWindow extends Component {
   }
 
   render() {
+    const { openWonDialog } = this.props
     const {
       checkField,
       explanationList,
@@ -193,40 +201,57 @@ class MainWindow extends Component {
 
         {showSolution && (
           <Grid item xs={6}>
-            <Grid container>
-              <Grid item xs={12}>
+            <Grid container direction="column">
+              <Grid item>
                 <Typography variant="h4" gutterBottom>
                   Explanation List
                 </Typography>
               </Grid>
 
-              <Grid item xs={12}>
-                <Grid container spacing="8">
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={this.solverPrevStep}
-                      disabled={!prevFieldSolutions.length}
-                    >
-                      Prev
-                    </Button>
+              <Grid item>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Grid container spacing={8}>
+                      <Grid item>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={this.solverPrevStep}
+                          disabled={!prevFieldSolutions.length}
+                        >
+                          Prev
+                        </Button>
+                      </Grid>
+
+                      <Grid item justify="flex-end">
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={this.solverNextStep}
+                          disabled={!solutionEvents.length}
+                        >
+                          Next
+                        </Button>
+                      </Grid>
+                    </Grid>
                   </Grid>
 
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={this.solverNextStep}
-                      disabled={!solutionEvents.length}
-                    >
-                      Next
-                    </Button>
+                  <Grid item xs={6}>
+                    <Grid container justify="flex-end">
+                      <Grid item>
+                        <FinishButton
+                          variant="contained"
+                          onClick={openWonDialog}
+                        >
+                          Finish
+                        </FinishButton>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
 
-              <Grid item xs={12} style={{ maxHeight: 400, overflow: 'auto' }}>
+              <Grid item style={{ maxHeight: 400, overflow: 'auto' }}>
                 <ExplanationList explanationList={explanationList} />
               </Grid>
             </Grid>
