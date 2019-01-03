@@ -50,17 +50,15 @@ class Game extends Component {
             exact
             path="/game"
             render={props => (
-              <MainWindow
-                {...props}
-                difficulty={difficulty}
-                openWonDialog={this.openWonDialog}
-              />
+              <Fragment>
+                <MainWindow
+                  {...props}
+                  difficulty={difficulty}
+                  openWonDialog={this.openWonDialog}
+                />
+                <EndDialog {...props} open={gameWon} />
+              </Fragment>
             )}
-          />
-          <Route
-            exact
-            path="/end"
-            render={props => <EndDialog {...props} open={gameWon} />}
           />
         </Switch>
       </Fragment>
