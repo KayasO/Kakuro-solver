@@ -210,7 +210,7 @@ class MainWindow extends Component {
 
               <Grid item>
                 <Grid container>
-                  <Grid item xs={6}>
+                  <Grid item>
                     <Grid container spacing={8}>
                       <Grid item>
                         <Button
@@ -236,7 +236,7 @@ class MainWindow extends Component {
                     </Grid>
                   </Grid>
 
-                  <Grid item xs={6}>
+                  <Grid item>
                     <Grid container justify="flex-end">
                       <Grid item>
                         <FinishButton
