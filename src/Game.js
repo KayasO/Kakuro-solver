@@ -6,7 +6,6 @@ import 'typeface-roboto'
 
 import { EASY_EXAMPLE } from './boardSetup'
 import MainWindow from './components/MainWindow'
-import EndDialog from './components/EndDialog'
 import StartMenu from './components/StartMenu'
 
 const GlobalStyle = createGlobalStyle`
@@ -18,13 +17,6 @@ const GlobalStyle = createGlobalStyle`
 class Game extends Component {
   state = {
     difficulty: EASY_EXAMPLE,
-    gameWon: false,
-  }
-
-  openWonDialog = () => {
-    this.setState({
-      gameWon: true,
-    })
   }
 
   changeDifficulty = difficulty =>
@@ -33,7 +25,7 @@ class Game extends Component {
     })
 
   render() {
-    const { difficulty, gameWon } = this.state
+    const { difficulty } = this.state
 
     return (
       <Fragment>
@@ -49,16 +41,7 @@ class Game extends Component {
           <Route
             exact
             path="/game"
-            render={props => (
-              <Fragment>
-                <MainWindow
-                  {...props}
-                  difficulty={difficulty}
-                  openWonDialog={this.openWonDialog}
-                />
-                <EndDialog {...props} open={gameWon} />
-              </Fragment>
-            )}
+            render={props => <MainWindow {...props} difficulty={difficulty} />}
           />
         </Switch>
       </Fragment>

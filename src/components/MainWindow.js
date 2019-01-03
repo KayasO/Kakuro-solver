@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Button, Grid, Typography } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
 import styled from 'styled-components'
@@ -6,6 +6,7 @@ import _ from 'lodash'
 
 import Field from './Field'
 import ExplanationList from './ExplanationList'
+import EndDialog from './EndDialog'
 import { mapToLists, mapToSimpleList } from '../mapper'
 import solve from '../solver'
 import check from '../check'
@@ -26,6 +27,7 @@ class MainWindow extends Component {
     solutionEvents: [],
     explanationList: [],
     showSolution: false,
+    gameWon: false,
   }
 
   componentDidMount() {
@@ -134,7 +136,7 @@ class MainWindow extends Component {
           })
         })
         if (boardCorrect) {
-          this.props.openWonDialog()
+          this.openWonDialog()
         }
         this.setState({
           showSolution: boardCorrect,
@@ -143,8 +145,13 @@ class MainWindow extends Component {
     )
   }
 
+  openWonDialog = () => {
+    this.setState({
+      gameWon: true,
+    })
+  }
+
   render() {
-    const { openWonDialog } = this.props
     const {
       checkField,
       explanationList,
@@ -152,112 +159,116 @@ class MainWindow extends Component {
       prevFieldSolutions,
       solutionEvents,
       showSolution,
+      gameWon,
     } = this.state
 
     return (
-      <Grid container>
-        <Grid item xs={6}>
-          <Grid container spacing="16">
-            <Grid item xs={12}>
-              <Typography variant="h4" gutterBottom>
-                Kakuro
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Field
-                field={showSolution ? solvedField : checkField}
-                showSolution={showSolution}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Grid container>
-                <Grid item xs={6}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={this.checkBoard}
-                    disabled={showSolution}
-                  >
-                    Check
-                  </Button>
-                </Grid>
-                <Grid item xs={6}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      this.setState({ showSolution: true })
-                    }}
-                  >
-                    Solution
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-
-        {showSolution && (
+      <Fragment>
+        <Grid container>
           <Grid item xs={6}>
-            <Grid container direction="column">
-              <Grid item>
+            <Grid container spacing="16">
+              <Grid item xs={12}>
                 <Typography variant="h4" gutterBottom>
-                  Explanation List
+                  Kakuro
                 </Typography>
               </Grid>
 
-              <Grid item>
-                <Grid container>
-                  <Grid item>
-                    <Grid container spacing={8}>
-                      <Grid item>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={this.solverPrevStep}
-                          disabled={!prevFieldSolutions.length}
-                        >
-                          Prev
-                        </Button>
-                      </Grid>
+              <Grid item xs={12}>
+                <Field
+                  field={showSolution ? solvedField : checkField}
+                  showSolution={showSolution}
+                />
+              </Grid>
 
-                      <Grid item justify="flex-end">
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={this.solverNextStep}
-                          disabled={!solutionEvents.length}
-                        >
-                          Next
-                        </Button>
+              <Grid item xs={12}>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={this.checkBoard}
+                      disabled={showSolution}
+                    >
+                      Check
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        this.setState({ showSolution: true })
+                      }}
+                    >
+                      Solution
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          {showSolution && (
+            <Grid item xs={6}>
+              <Grid container direction="column">
+                <Grid item>
+                  <Typography variant="h4" gutterBottom>
+                    Explanation List
+                  </Typography>
+                </Grid>
+
+                <Grid item>
+                  <Grid container>
+                    <Grid item>
+                      <Grid container spacing={8}>
+                        <Grid item>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={this.solverPrevStep}
+                            disabled={!prevFieldSolutions.length}
+                          >
+                            Prev
+                          </Button>
+                        </Grid>
+
+                        <Grid item justify="flex-end">
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={this.solverNextStep}
+                            disabled={!solutionEvents.length}
+                          >
+                            Next
+                          </Button>
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
 
-                  <Grid item>
-                    <Grid container justify="flex-end">
-                      <Grid item>
-                        <FinishButton
-                          variant="contained"
-                          onClick={openWonDialog}
-                        >
-                          Finish
-                        </FinishButton>
+                    <Grid item>
+                      <Grid container justify="flex-end">
+                        <Grid item>
+                          <FinishButton
+                            variant="contained"
+                            onClick={this.openWonDialog}
+                          >
+                            Finish
+                          </FinishButton>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
 
-              <Grid item style={{ maxHeight: 350, overflow: 'auto' }}>
-                <ExplanationList explanationList={explanationList} />
+                <Grid item style={{ maxHeight: 350, overflow: 'auto' }}>
+                  <ExplanationList explanationList={explanationList} />
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        )}
-      </Grid>
+          )}
+        </Grid>
+        <EndDialog {...this.props} open={gameWon} />
+      </Fragment>
     )
   }
 }
