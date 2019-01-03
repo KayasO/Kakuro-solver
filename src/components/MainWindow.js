@@ -212,7 +212,11 @@ class MainWindow extends Component {
             />
           )}
         </Grid>
-        <EndDialog {...this.props} open={gameWon} />
+        <EndDialog
+          {...this.props}
+          open={gameWon}
+          closeShowSolution={() => this.setState({ showSolution: false })}
+        />
       </Fragment>
     )
   }
