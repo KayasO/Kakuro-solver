@@ -35,8 +35,8 @@ const TopRight = styled.span`
 export default ({ classes, entry }) => {
   return (
     <EntryCell className={classes.tableCell}>
-      <BottomLeft>{entry.sumV}</BottomLeft>
-      <TopRight>{entry.sumH}</TopRight>
+      <BottomLeft>{entry.sumV || ''}</BottomLeft>
+      <TopRight>{entry.sumH || ''}</TopRight>
     </EntryCell>
   )
 }
