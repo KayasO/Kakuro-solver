@@ -251,7 +251,7 @@ class MainWindow extends Component {
                 </Grid>
               </Grid>
 
-              <Grid item style={{ maxHeight: 400, overflow: 'auto' }}>
+              <Grid item style={{ maxHeight: 350, overflow: 'auto' }}>
                 <ExplanationList explanationList={explanationList} />
               </Grid>
             </Grid>
