@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
 import { TableCell, Input } from '@material-ui/core'
-import { lightGreen, indigo, red } from '@material-ui/core/colors'
+import { yellow, grey, lightGreen, indigo, red } from '@material-ui/core/colors'
 import styled from 'styled-components'
 
 const Cell = styled(TableCell)`
   background-color: ${props => {
     if (props.showSolution) {
       if (props.lastSolved) {
-        return lightGreen['A400']
+        return yellow['A200']
       } else if (props.solved) {
-        return lightGreen['A200']
+        return lightGreen['A400']
       }
     } else if (props.isFalse) {
       return red[500]
     } else {
-      return 'white'
+      return grey[100]
     }
   }};
-  color: ${indigo[500]} !important;
 
   padding: 0 !important;
   min-width: 60px !important;
@@ -28,6 +27,7 @@ const Number = styled(Input)`
   padding-left: 25px;
   text-align: center !important;
   font-size: 1.5em !important;
+  color: ${indigo[500]} !important;
 `
 
 class WhiteCell extends Component {
