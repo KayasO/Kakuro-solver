@@ -166,36 +166,34 @@ class MainWindow extends Component {
                 </Typography>
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid item container justify="center">
                 <Field
                   field={showSolution ? solvedField : checkField}
                   showSolution={showSolution}
                 />
               </Grid>
 
-              <Grid item xs={12}>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={this.checkBoard}
-                      disabled={showSolution}
-                    >
-                      Check
-                    </Button>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => {
-                        this.setState({ showSolution: true })
-                      }}
-                    >
-                      Solution
-                    </Button>
-                  </Grid>
+              <Grid item container spacing={8} xs={12}>
+                <Grid item container justify="flex-end" xs={6}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={this.checkBoard}
+                    disabled={showSolution}
+                  >
+                    Check
+                  </Button>
+                </Grid>
+                <Grid item xs={6}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                      this.setState({ showSolution: true })
+                    }}
+                  >
+                    Solution
+                  </Button>
                 </Grid>
               </Grid>
             </Grid>

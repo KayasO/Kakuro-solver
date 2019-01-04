@@ -30,43 +30,35 @@ class Explanation extends Component {
             </Typography>
           </Grid>
 
-          <Grid item>
-            <Grid container>
+          <Grid item container>
+            <Grid item container spacing={8} xs={6}>
               <Grid item>
-                <Grid container spacing={8}>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={solverPrevStep}
-                      disabled={!prevFieldSolutions.length}
-                    >
-                      Prev
-                    </Button>
-                  </Grid>
-
-                  <Grid item justify="flex-end">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={solverNextStep}
-                      disabled={!solutionEvents.length}
-                    >
-                      Next
-                    </Button>
-                  </Grid>
-                </Grid>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={solverPrevStep}
+                  disabled={!prevFieldSolutions.length}
+                >
+                  Prev
+                </Button>
               </Grid>
 
               <Grid item>
-                <Grid container justify="flex-end">
-                  <Grid item>
-                    <FinishButton variant="contained" onClick={openWonDialog}>
-                      Finish
-                    </FinishButton>
-                  </Grid>
-                </Grid>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={solverNextStep}
+                  disabled={!solutionEvents.length}
+                >
+                  Next
+                </Button>
               </Grid>
+            </Grid>
+
+            <Grid item container justify="flex-end" xs={6}>
+              <FinishButton variant="contained" onClick={openWonDialog}>
+                Finish
+              </FinishButton>
             </Grid>
           </Grid>
 
