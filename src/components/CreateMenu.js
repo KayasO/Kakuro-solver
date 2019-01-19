@@ -38,6 +38,8 @@ class CreateMenu extends Component {
   render() {
     const { field } = this.state
 
+    console.log(field[0][0].type)
+
     return (
       <Fragment>
         <Button variant="contained" color="secondary" onClick={this.addRow}>

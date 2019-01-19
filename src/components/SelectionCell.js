@@ -12,28 +12,33 @@ const Cell = styled(TableCell)`
 class SelectionCell extends Component {
   state = {
     type: '',
-    openDialog: false,
+    entry: {
+      horizontal: '',
+      vertical: '',
+    },
+    open: false,
   }
 
-  selectType = () => {
-    console.log('openDialog')
+  openDialog = () => {
     this.setState({
-      openDialog: true,
+      open: true,
     })
   }
 
-  handleClose = () =>
+  handleClose = (type, entry) =>
     this.setState({
-      openDialog: false,
+      open: false,
+      type,
+      entry: entry || {},
     })
 
   render() {
-    const { openDialog } = this.state
+    const { open } = this.state
 
     return (
       <Fragment>
-        <Cell {...this.props} onClick={this.selectType} />
-        <SelectionDialog open={openDialog} handleClose={this.handleClose} />
+        <Cell {...this.props} onClick={this.openDialog} />
+        <SelectionDialog open={open} handleClose={this.handleClose} />
       </Fragment>
     )
   }
