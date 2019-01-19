@@ -6,19 +6,30 @@ import _ from 'lodash'
 
 import Cell from './SelectionCell'
 import CustomField from './CustomField'
+import { Entry } from '../entry'
+import { WhiteCell } from '../whiteCell'
 
 const SelectionCell = styled(Cell)`
   border: 2px solid grey;
 `
 
 class CreateMenu extends Component {
-  state = {
-    field: [[<SelectionCell />]],
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      field: [[<SelectionCell x="0" y="0" callBack={this.callBack} />]],
+      finishedField: [[null]],
+    }
   }
 
   addRow = () => {
     this.setState({
-      field: _.map(this.state.field, row => [...row, <SelectionCell />]),
+      field: _.map(this.state.field, (row, i) => [
+        ...row,
+        <SelectionCell x={row.length} y={i} callBack={this.callBack} />,
+      ]),
+      finishedField: _.map(this.state.finishedField, row => [...row, null]),
     })
   }
 
@@ -27,18 +38,38 @@ class CreateMenu extends Component {
     const newColumn = []
 
     for (let i = 0; i < rowLength; i++) {
-      newColumn.push(<SelectionCell />)
+      newColumn.push(
+        <SelectionCell
+          x={i}
+          y={this.state.field.length}
+          callBack={this.callBack}
+        />
+      )
     }
 
     this.setState({
       field: [...this.state.field, newColumn],
+      finishedField: [...this.state.finishedField, Array(rowLength).fill(null)],
+    })
+  }
+
+  callBack = (x, y, type, entry) => {
+    const { finishedField } = this.state
+
+    if (type === 'ENTRY') {
+      finishedField[x][y] = new Entry(entry.horizontal, entry.vertical)
+    } else if (type === 'WHITE') {
+      finishedField[x][y] = new WhiteCell()
+    }
+
+    this.setState({
+      finishedField: this.state.finishedField,
     })
   }
 
   render() {
     const { field } = this.state
-
-    console.log(field[0][0].type)
+    console.log(this.state.finishedField)
 
     return (
       <Fragment>
@@ -52,7 +83,9 @@ class CreateMenu extends Component {
         <CustomField field={field} />
 
         <Link to="/">Back</Link>
-        <Link to="/game">Start</Link>
+        <Button color="primary" onClick={this.startGame}>
+          START
+        </Button>
       </Fragment>
     )
   }

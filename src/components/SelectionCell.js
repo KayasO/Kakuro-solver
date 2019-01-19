@@ -12,10 +12,6 @@ const Cell = styled(TableCell)`
 class SelectionCell extends Component {
   state = {
     type: '',
-    entry: {
-      horizontal: '',
-      vertical: '',
-    },
     open: false,
   }
 
@@ -25,15 +21,19 @@ class SelectionCell extends Component {
     })
   }
 
-  handleClose = (type, entry) =>
+  handleClose = (type, entry) => {
+    const { callBack, x, y } = this.props
+    callBack(x, y, type, entry)
+
     this.setState({
       open: false,
       type,
-      entry: entry || {},
     })
+  }
 
   render() {
     const { open } = this.state
+    console.log(this.props)
 
     return (
       <Fragment>
