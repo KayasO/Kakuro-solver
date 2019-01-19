@@ -14,7 +14,7 @@ const styles = theme => ({
     border: '5px solid',
   },
   tableCell: {
-    border: '2px solid grey',
+    border: '2px solid black',
   },
 })
 

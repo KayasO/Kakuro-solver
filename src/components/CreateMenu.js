@@ -24,7 +24,7 @@ class CreateMenu extends Component {
 
   addColumn = () => {
     const rowLength = this.state.field[0].length
-    let newColumn = []
+    const newColumn = []
 
     for (let i = 0; i < rowLength; i++) {
       newColumn.push(<SelectionCell />)

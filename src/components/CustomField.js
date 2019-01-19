@@ -15,7 +15,6 @@ const styles = theme => ({
 class CustomField extends Component {
   render() {
     const { classes, field } = this.props
-    console.log(field)
 
     return (
       <Table className={classes.table} padding="dense">
