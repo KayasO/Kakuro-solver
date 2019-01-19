@@ -18,7 +18,6 @@ const styles = theme => ({
   },
 })
 
-// TODO: Probably doesn't need any Logic
 class Field extends Component {
   render() {
     const { classes, field, showSolution } = this.props
