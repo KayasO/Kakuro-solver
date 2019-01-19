@@ -13,10 +13,26 @@ const SelectionCell = styled(Cell)`
 
 class CreateMenu extends Component {
   state = {
-    field: [
-      [<SelectionCell />, <SelectionCell />],
-      [<SelectionCell />, <SelectionCell />],
-    ],
+    field: [[<SelectionCell />]],
+  }
+
+  addRow = () => {
+    this.setState({
+      field: _.map(this.state.field, row => [...row, <SelectionCell />]),
+    })
+  }
+
+  addColumn = () => {
+    const rowLength = this.state.field[0].length
+    let newColumn = []
+
+    for (let i = 0; i < rowLength; i++) {
+      newColumn.push(<SelectionCell />)
+    }
+
+    this.setState({
+      field: [...this.state.field, newColumn],
+    })
   }
 
   render() {
@@ -24,10 +40,10 @@ class CreateMenu extends Component {
 
     return (
       <Fragment>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="secondary" onClick={this.addRow}>
           Add Row
         </Button>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="secondary" onClick={this.addColumn}>
           Add Column
         </Button>
 
