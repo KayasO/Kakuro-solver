@@ -1,14 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Grid, Typography } from '@material-ui/core'
-import { green } from '@material-ui/core/colors'
-import styled from 'styled-components'
 
 import ExplanationList from './ExplanationList'
-
-const FinishButton = styled(Button)`
-  background-color: ${`${green[500]} !important`};
-  color: white !important;
-`
 
 class Explanation extends Component {
   render() {
@@ -16,7 +9,6 @@ class Explanation extends Component {
       explanationList,
       prevFieldSolutions,
       solutionEvents,
-      openWonDialog,
       solverNextStep,
       solverPrevStep,
     } = this.props
@@ -30,35 +22,27 @@ class Explanation extends Component {
             </Typography>
           </Grid>
 
-          <Grid item container>
-            <Grid item container spacing={8} xs={6}>
-              <Grid item>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={solverPrevStep}
-                  disabled={!prevFieldSolutions.length}
-                >
-                  Prev
-                </Button>
-              </Grid>
-
-              <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={solverNextStep}
-                  disabled={!solutionEvents.length}
-                >
-                  Next
-                </Button>
-              </Grid>
+          <Grid item container spacing={16} justify="center">
+            <Grid item>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={solverPrevStep}
+                disabled={!prevFieldSolutions.length}
+              >
+                Prev
+              </Button>
             </Grid>
 
-            <Grid item container justify="flex-end" xs={6}>
-              <FinishButton variant="contained" onClick={openWonDialog}>
-                Finish
-              </FinishButton>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={solverNextStep}
+                disabled={!solutionEvents.length}
+              >
+                Next
+              </Button>
             </Grid>
           </Grid>
 

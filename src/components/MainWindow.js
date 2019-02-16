@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Button, Grid, Typography } from '@material-ui/core'
+import { green } from '@material-ui/core/colors'
+import HomeIcon from '@material-ui/icons/Home'
+import styled from 'styled-components'
 import _ from 'lodash'
 
 import Field from './Field'
@@ -8,6 +11,12 @@ import EndDialog from './EndDialog'
 import { mapToLists, mapToSimpleList } from '../mapper'
 import solve from '../solver'
 import check from '../check'
+
+const FinishButton = styled(Button)`
+  background-color: ${`${green[500]} !important`};
+  color: white !important;
+  margin-right: 25px !important;
+`
 
 class MainWindow extends Component {
   state = {
@@ -160,10 +169,17 @@ class MainWindow extends Component {
         <Grid container>
           <Grid item xs={6}>
             <Grid container spacing="16">
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <Typography variant="h4" gutterBottom>
                   Kakuro
                 </Typography>
+              </Grid>
+
+              <Grid container item xs={6} justify="flex-end">
+                <FinishButton variant="contained" onClick={this.openWonDialog}>
+                  <HomeIcon />
+                  Menu
+                </FinishButton>
               </Grid>
 
               <Grid item container justify="center">
