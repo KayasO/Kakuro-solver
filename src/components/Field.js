@@ -14,10 +14,11 @@ const styles = theme => ({
     border: '5px solid',
   },
   tableCell: {
-    border: '2px solid black',
+    border: '2px solid grey',
   },
 })
 
+// TODO: Probably doesn't need any Logic
 class Field extends Component {
   render() {
     const { classes, field, showSolution } = this.props

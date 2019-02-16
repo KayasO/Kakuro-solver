@@ -7,7 +7,6 @@ import 'typeface-roboto'
 import { EASY_EXAMPLE } from './boardSetup'
 import MainWindow from './components/MainWindow'
 import StartMenu from './components/StartMenu'
-import CreateMenu from './components/CreateMenu'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -38,11 +37,6 @@ class Game extends Component {
             render={props => (
               <StartMenu {...props} changeDifficulty={this.changeDifficulty} />
             )}
-          />
-          <Route
-            exact
-            path="/create"
-            render={props => <CreateMenu {...props} />}
           />
           <Route
             exact
