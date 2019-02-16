@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withNamespaces } from 'react-i18next'
 import { Button, Grid, Typography } from '@material-ui/core'
 
 import ExplanationList from './ExplanationList'
@@ -11,6 +12,7 @@ class Explanation extends Component {
       solutionEvents,
       solverNextStep,
       solverPrevStep,
+      t,
     } = this.props
 
     return (
@@ -18,7 +20,7 @@ class Explanation extends Component {
         <Grid container direction="column">
           <Grid item>
             <Typography variant="h4" gutterBottom>
-              Explanation List
+              {t('general.explanationList')}
             </Typography>
           </Grid>
 
@@ -30,7 +32,7 @@ class Explanation extends Component {
                 onClick={solverPrevStep}
                 disabled={!prevFieldSolutions.length}
               >
-                Prev
+                {t('buttons.prev')}
               </Button>
             </Grid>
 
@@ -41,7 +43,7 @@ class Explanation extends Component {
                 onClick={solverNextStep}
                 disabled={!solutionEvents.length}
               >
-                Next
+                {t('buttons.next')}
               </Button>
             </Grid>
           </Grid>
@@ -55,4 +57,4 @@ class Explanation extends Component {
   }
 }
 
-export default Explanation
+export default withNamespaces()(Explanation)

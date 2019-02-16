@@ -1,4 +1,23 @@
 {
+  "general": {
+    "kakuro": "Kakuro",
+    "explanationList": "Liste der Lösungen",
+    "startMenu": "Start Menü",
+    "gameFinished": "Spiel beendet"
+  },
+  "buttons": {
+    "check": "Prüfe",
+    "menu": "Menü",
+    "solution": "Lösung",
+    "ok": "Ok",
+    "next": "Weiter",
+    "prev": "Zurück"
+  },
+  "difficulties": {
+    "easy": "Einfach",
+    "challenging": "Anspruchsvoll",
+    "expert": "Experte"
+  },
   "explanations": {
     "only": "Lösungen für vertikalen Entry: [{{ explanation.notesBefore }}] Lösungen für horizontalen Entry: [{{ explanation.possibleSolutions }}]. Die einzige mögliche Lösung ist {{ explanation.cell.value }}",
     "intersection": "Die Vereinigung der horizontalen und vertikalen Menge ist: [{{ explanation.possibleSolutions }}]. Mögliche Lösungen für die Zelle wären: [{{ explanation.notesBefore }}]. Die Lösung ist: {{ explanation.cell.value }}",

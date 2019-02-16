@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  Button,
-  Grid,
-  Paper,
-  Typography,
-  withStyles,
-  Divider,
-} from '@material-ui/core'
+import { withNamespaces } from 'react-i18next'
+import { Grid, Paper, Typography, withStyles, Divider } from '@material-ui/core'
 import styled from 'styled-components'
 
 import LanguagePicker from './LanguagePicker'
@@ -36,12 +30,12 @@ const CustomLink = styled(Link)`
 
 class StartMenu extends Component {
   render() {
-    const { changeDifficulty, classes, i18n } = this.props
+    const { changeDifficulty, classes, t } = this.props
 
     return (
       <Grid container direction="column" alignItems="center" spacing="40">
         <Grid item>
-          <Typography variant="h4">Start Menu</Typography>
+          <Typography variant="h4">{t('general.startMenu')}</Typography>
         </Grid>
 
         <Grid item>
@@ -62,7 +56,7 @@ class StartMenu extends Component {
                       onClick={() => changeDifficulty(EASY_4x4)}
                     >
                       <Typography variant="subtitle1" color="primary">
-                        Easy
+                        {t('difficulties.easy')}
                       </Typography>
                     </CustomLink>
                   </Grid>
@@ -72,7 +66,7 @@ class StartMenu extends Component {
                       onClick={() => changeDifficulty(CHALLENGING_4x4)}
                     >
                       <Typography variant="subtitle1" color="primary">
-                        Challenging
+                        {t('difficulties.challenging')}
                       </Typography>
                     </CustomLink>
                   </Grid>
@@ -82,7 +76,7 @@ class StartMenu extends Component {
                       onClick={() => changeDifficulty(EXPERT_4x4)}
                     >
                       <Typography variant="subtitle1" color="primary">
-                        Expert
+                        {t('difficulties.expert')}
                       </Typography>
                     </CustomLink>
                   </Grid>
@@ -106,7 +100,7 @@ class StartMenu extends Component {
                       onClick={() => changeDifficulty(EASY_6x6)}
                     >
                       <Typography variant="subtitle1" color="primary">
-                        Easy
+                        {t('difficulties.easy')}
                       </Typography>
                     </CustomLink>
                   </Grid>
@@ -130,7 +124,7 @@ class StartMenu extends Component {
                       onClick={() => changeDifficulty(EXPERT_9x17)}
                     >
                       <Typography variant="subtitle1" color="primary">
-                        Expert
+                        {t('difficulties.expert')}
                       </Typography>
                     </CustomLink>
                   </Grid>
@@ -148,4 +142,4 @@ class StartMenu extends Component {
   }
 }
 
-export default withStyles(styles)(StartMenu)
+export default withStyles(styles)(withNamespaces()(StartMenu))

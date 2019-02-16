@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import { Button } from '@material-ui/core'
 import { withNamespaces } from 'react-i18next'
+import { Button } from '@material-ui/core'
 
 class LanguagePicker extends Component {
   state = {

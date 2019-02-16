@@ -1,4 +1,23 @@
 {
+  "general": {
+    "kakuro": "Kakuro",
+    "explanationList": "Explanation List",
+    "startMenu": "Start Menu",
+    "gameFinished": "Game finished"
+  },
+  "buttons": {
+    "check": "Check",
+    "menu": "Menu",
+    "solution": "Solution",
+    "ok": "Ok",
+    "next": "Next",
+    "prev": "Prev"
+  },
+  "difficulties": {
+    "easy": "Easy",
+    "challenging": "Challenging",
+    "expert": "Expert"
+  },
   "explanations": {
     "only": "Solutions for vertical Entry: [{{ explanation.notesBefore }}] Solutions for horizontal Entry: [{{ explanation.possibleSolutions }}]. The only possible solution is: {{ explanation.cell.value }}",
     "intersection": "The union of horizontal and vertical sets is: [{{ explanation.possibleSolutions }}]. Possible solutions for this cell are: [{{ explanation.notesBefore }}]. The solution is: {{ explanation.cell.value }}",

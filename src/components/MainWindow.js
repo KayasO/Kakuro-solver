@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { withNamespaces } from 'react-i18next'
 import { Button, Grid, Typography } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
 import HomeIcon from '@material-ui/icons/Home'
@@ -155,6 +156,7 @@ class MainWindow extends Component {
   }
 
   render() {
+    const { t } = this.props
     const {
       checkField,
       explanationList,
@@ -172,14 +174,14 @@ class MainWindow extends Component {
             <Grid container spacing="16">
               <Grid item xs={6}>
                 <Typography variant="h4" gutterBottom>
-                  Kakuro
+                  {t('general.kakuro')}
                 </Typography>
               </Grid>
 
               <Grid container item xs={6} justify="flex-end">
                 <FinishButton variant="contained" onClick={this.openWonDialog}>
                   <HomeIcon />
-                  Menu
+                  {t('buttons.menu')}
                 </FinishButton>
               </Grid>
 
@@ -198,7 +200,7 @@ class MainWindow extends Component {
                     onClick={this.checkBoard}
                     disabled={showSolution}
                   >
-                    Check
+                    {t('buttons.check')}
                   </Button>
                 </Grid>
                 <Grid item xs={6}>
@@ -209,7 +211,7 @@ class MainWindow extends Component {
                       this.setState({ showSolution: true })
                     }}
                   >
-                    Solution
+                    {t('buttons.solution')}
                   </Button>
                 </Grid>
               </Grid>
@@ -241,4 +243,4 @@ class MainWindow extends Component {
   }
 }
 
-export default MainWindow
+export default withNamespaces()(MainWindow)

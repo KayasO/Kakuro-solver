@@ -1,11 +1,12 @@
 import React from 'react'
+import { withNamespaces } from 'react-i18next'
 import { Button, Dialog, DialogTitle } from '@material-ui/core'
 
-export default props => {
-  const { open, closeShowSolution } = props
+export default withNamespaces()(props => {
+  const { open, closeShowSolution, t } = props
   return (
     <Dialog open={open}>
-      <DialogTitle>Game finished</DialogTitle>
+      <DialogTitle>{t('general.gameFinished')}</DialogTitle>
       <Button
         color="secondary"
         onClick={() => {
@@ -13,8 +14,8 @@ export default props => {
           closeShowSolution()
         }}
       >
-        Restart
+        {t('buttons.ok')}
       </Button>
     </Dialog>
   )
-}
+})
