@@ -5,7 +5,7 @@ import { Button, Dialog, DialogTitle } from '@material-ui/core'
 export default withNamespaces()(props => {
   const { open, closeShowSolution, t } = props
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onClose={closeShowSolution}>
       <DialogTitle>{t('general.gameFinished')}</DialogTitle>
       <Button
         color="secondary"

@@ -232,7 +232,9 @@ class MainWindow extends Component {
         <EndDialog
           {...this.props}
           open={gameWon}
-          closeShowSolution={() => this.setState({ showSolution: false })}
+          closeShowSolution={() =>
+            this.setState({ showSolution: false, gameWon: false })
+          }
         />
 
         <Grid container justify="center">
