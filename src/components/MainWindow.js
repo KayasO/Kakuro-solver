@@ -11,6 +11,7 @@ import EndDialog from './EndDialog'
 import { mapToLists, mapToSimpleList } from '../mapper'
 import solve from '../solver'
 import check from '../check'
+import LanguagePicker from './LanguagePicker'
 
 const FinishButton = styled(Button)`
   background-color: ${`${green[500]} !important`};
@@ -231,6 +232,10 @@ class MainWindow extends Component {
           open={gameWon}
           closeShowSolution={() => this.setState({ showSolution: false })}
         />
+
+        <Grid container justify="center">
+          <LanguagePicker />
+        </Grid>
       </Fragment>
     )
   }

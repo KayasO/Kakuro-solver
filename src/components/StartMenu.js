@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Grid, Paper, Typography, withStyles, Divider } from '@material-ui/core'
+import {
+  Button,
+  Grid,
+  Paper,
+  Typography,
+  withStyles,
+  Divider,
+} from '@material-ui/core'
 import styled from 'styled-components'
 
+import LanguagePicker from './LanguagePicker'
 import {
   EASY_4x4,
   CHALLENGING_4x4,
@@ -28,7 +36,7 @@ const CustomLink = styled(Link)`
 
 class StartMenu extends Component {
   render() {
-    const { changeDifficulty, classes } = this.props
+    const { changeDifficulty, classes, i18n } = this.props
 
     return (
       <Grid container direction="column" alignItems="center" spacing="40">
@@ -130,6 +138,10 @@ class StartMenu extends Component {
               </Paper>
             </Grid>
           </Grid>
+        </Grid>
+
+        <Grid item>
+          <LanguagePicker />
         </Grid>
       </Grid>
     )

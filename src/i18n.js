@@ -5,7 +5,7 @@ import translationEN from './locales/en-US.json'
 import translationDE from './locales/de-DE.json'
 
 i18n.use(reactI18nextModule).init({
-  lng: 'en',
+  lng: 'en-US',
   resources: {
     en: {
       translation: translationEN,
