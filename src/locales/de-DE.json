@@ -1,7 +1,8 @@
 {
   "explanations": {
-    "only": "Die einzige mögliche Lösung ist {{ explanation.cell.value }}",
+    "only": "Lösungen für vertikalen Entry: [{{ explanation.notesBefore }}] Lösungen für horizontalen Entry: [{{ explanation.possibleSolutions }}]. Die einzige mögliche Lösung ist {{ explanation.cell.value }}",
+    "intersection": "Die Vereinigung der horizontalen und vertikalen Menge ist: [{{ explanation.possibleSolutions }}]. Mögliche Lösungen für die Zelle wären: [{{ explanation.notesBefore }}]. Die Lösung ist: {{ explanation.cell.value }}",
     "random": "Es kann keine eindeutige Lösung ermittelt werden. Mögliche Lösungen wären [{{ explanation.possibleSolutions }}]. Zuffälig die Zahl {{ explanation.cell.value }} gewählt.",
-    "solved": "Mögliche Lösungen für diese Zelle wären [{{ explanation.notesBefore }}]. Die zuletzt gelöste Zelle hatte den Wert {{ explanation.cellSolution }}. Daher kommt für diese Zelle nur noch die Lösung {{ explanation.cell.value }} in frage."
+    "solved": "Mögliche Lösungen für diese Zelle könnten sein [{{ explanation.notesBefore }}]. Die zuletzt gelöste Zelle hatte den Wert {{ explanation.cellSolution }}. Daher kommt für diese Zelle nur noch die Lösung {{ explanation.cell.value }} in frage."
   }
 }

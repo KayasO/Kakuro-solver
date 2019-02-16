@@ -52,7 +52,7 @@ function updateNotesWithSets() {
           cell: wCell,
           notesBefore: wCell.notes,
           possibleSolutions: unionSets,
-          type: 'intersection notes with unionSets',
+          type: 'intersection',
         }
 
         wCell.notes = _.intersection(wCell.notes, unionSets)
@@ -75,7 +75,7 @@ function updateNotesWithSets() {
           cell: wCell,
           notesBefore: wCell.notes,
           possibleSolutions: unionSets,
-          type: 'intersection notes with unionSets',
+          type: 'intersection',
         }
 
         wCell.notes = _.intersection(wCell.notes, unionSets)
