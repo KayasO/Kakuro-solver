@@ -4,7 +4,8 @@
     "explanationList": "Explanation List",
     "startMenu": "Start Menu",
     "gameFinished": "Game finished",
-    "custom": "Custom board"
+    "custom": "Custom board",
+    "size": "Size"
   },
   "buttons": {
     "check": "Check",

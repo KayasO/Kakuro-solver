@@ -1,37 +1,60 @@
 import React, { Component } from 'react'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
+  InputLabel,
   Grid,
+  FormControl,
+  MenuItem,
+  Select,
   Table,
   TableBody,
   TableRow,
   TableCell,
   Typography,
 } from '@material-ui/core'
-import { withNamespaces } from 'react-i18next'
+import { green } from '@material-ui/core/colors'
 import { withStyles } from '@material-ui/core/styles'
+import HomeIcon from '@material-ui/icons/Home'
 import CellTypePicker from './CellTypePicker'
 
 import { mapToBoardArray } from '../mapper'
 
 const styles = theme => ({
   table: {
-    width: '250px',
-    height: '250px',
-    marginTop: '25px',
-    marginBottom: '25px',
+    width: 250,
+    height: 250,
+    marginTop: 25,
+    marginBottom: 25,
     border: '5px solid',
   },
   tableCell: {
     border: '2px solid black',
   },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 80,
+  },
+  home: {
+    backgroundColor: `${green[500]}`,
+    color: 'white',
+  },
 })
 
 class CustomBoard extends Component {
   state = {
-    board: Array(5).fill(
-      Array(5).fill({ type: 'empty', horizontal: '0', vertical: '0' })
-    ),
+    board: null,
+    size: '',
+  }
+
+  setupBoard = event => {
+    const size = event.target.value
+    this.setState({
+      board: Array(size).fill(
+        Array(size).fill({ type: 'empty', horizontal: '0', vertical: '0' })
+      ),
+      size,
+    })
   }
 
   handleFieldChange = (row, col) => (event, name) => {
@@ -59,13 +82,11 @@ class CustomBoard extends Component {
                   vertical: event.target.value,
                 }
               }
-            } else {
-              return value
             }
+            return value
           })
-        } else {
-          return bRow
         }
+        return bRow
       }),
     })
   }
@@ -78,55 +99,88 @@ class CustomBoard extends Component {
 
   render() {
     const { classes, t } = this.props
+    const { board, size } = this.state
 
     return (
       <Grid container>
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <Typography variant="h4">{t('general.custom')}</Typography>
         </Grid>
 
-        <Grid item>
-          <Table className={classes.table} padding="dense">
-            <TableBody>
-              {Array(5)
-                .fill('')
-                .map((item, i) => {
-                  return (
-                    <TableRow>
-                      {Array(5)
-                        .fill('')
-                        .map((item, j) => {
-                          return (
-                            <TableCell className={classes.tableCell}>
-                              <CellTypePicker
-                                handleFieldChange={this.handleFieldChange(i, j)}
-                              />
-                            </TableCell>
-                          )
-                        })}
-                    </TableRow>
-                  )
-                })}
-            </TableBody>
-          </Table>
+        <Grid item xs={6}>
+          <Button
+            className={classes.home}
+            variant="contained"
+            onClick={() => this.props.history.push('/')}
+          >
+            <HomeIcon />
+            {t('buttons.menu')}
+          </Button>
         </Grid>
 
-        <Grid item container xs={6} justify="center" spacing={16}>
-          <Grid item>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => this.props.history.push('/')}
+        <Grid item>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="size-simple">{t('general.size')}</InputLabel>
+            <Select
+              value={size}
+              onChange={this.setupBoard}
+              inputProps={{
+                name: 'size',
+                id: 'size-simple',
+              }}
             >
-              {t('buttons.back')}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button variant="contained" color="primary" onClick={this.start}>
-              {t('buttons.start')}
-            </Button>
-          </Grid>
+              <MenuItem value={3}>3x3</MenuItem>
+              <MenuItem value={4}>4x4</MenuItem>
+              <MenuItem value={5}>5x5</MenuItem>
+              <MenuItem value={6}>6x6</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
+
+        {board && (
+          <Grid item container>
+            <Grid item xs={12}>
+              <Table className={classes.table} padding="dense">
+                <TableBody>
+                  {Array(size)
+                    .fill('')
+                    .map((item, i) => {
+                      return (
+                        <TableRow>
+                          {Array(size)
+                            .fill('')
+                            .map((item, j) => {
+                              return (
+                                <TableCell className={classes.tableCell}>
+                                  <CellTypePicker
+                                    handleFieldChange={this.handleFieldChange(
+                                      i,
+                                      j
+                                    )}
+                                  />
+                                </TableCell>
+                              )
+                            })}
+                        </TableRow>
+                      )
+                    })}
+                </TableBody>
+              </Table>
+            </Grid>
+
+            <Grid item container xs={6} justify="flex-end">
+              <Grid item>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.start}
+                >
+                  {t('buttons.start')}
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        )}
       </Grid>
     )
   }

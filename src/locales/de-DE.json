@@ -4,7 +4,8 @@
     "explanationList": "Liste der Lösungen",
     "startMenu": "Start Menü",
     "gameFinished": "Spiel beendet",
-    "custom": "Eigenes Spielfeld"
+    "custom": "Eigenes Spielfeld",
+    "size": "Größe"
   },
   "buttons": {
     "check": "Prüfe",
