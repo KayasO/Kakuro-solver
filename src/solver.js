@@ -333,11 +333,12 @@ export default fieldAsLists => {
   let solutionEventsCopy = []
   let lastIteration = []
   let stuckCounter = 0
+  let totalCounter = 0
   let j = 0
 
   setupSolutionSets()
 
-  while (!finished) {
+  while (!finished && totalCounter < 50) {
     if (j > 0) loadField(solutionsCopy, notesCopy, solutionEventsCopy)
 
     stuckCounter = 0
@@ -365,6 +366,7 @@ export default fieldAsLists => {
     }
 
     j++
+    totalCounter++
     finished = _.filter(allWhiteCells, wCell => wCell.value === 0).length === 0
   }
 
