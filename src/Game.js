@@ -7,6 +7,7 @@ import 'typeface-roboto'
 import { EASY_EXAMPLE } from './boardSetup'
 import MainWindow from './components/MainWindow'
 import StartMenu from './components/StartMenu'
+import CustomBoard from './components/CustomBoard'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -42,6 +43,11 @@ class Game extends Component {
             exact
             path="/game"
             render={props => <MainWindow {...props} difficulty={difficulty} />}
+          />
+          <Route
+            exact
+            path="/custom"
+            render={props => <CustomBoard {...props} />}
           />
         </Switch>
       </Fragment>

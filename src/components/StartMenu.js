@@ -22,6 +22,11 @@ const styles = theme => ({
   body: {
     paddingTop: theme.spacing.unit,
   },
+  custom: {
+    padding: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2,
+    textAlign: 'center',
+  },
 })
 
 const CustomLink = styled(Link)`
@@ -131,6 +136,16 @@ class StartMenu extends Component {
                 </Grid>
               </Paper>
             </Grid>
+          </Grid>
+
+          <Grid item>
+            <Paper className={classes.custom}>
+              <CustomLink to="/custom">
+                <Typography variant="h6" color="secondary">
+                  {t('difficulties.custom')}
+                </Typography>
+              </CustomLink>
+            </Paper>
           </Grid>
         </Grid>
 
