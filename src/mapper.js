@@ -81,13 +81,12 @@ export function mapToSimpleList(input) {
 export function mapToBoardArray(input) {
   return input.map(row => {
     return row.map(cell => {
-      if (cell.type === 'empty') {
-        return null
-      } else if (cell.type === 'entry') {
+      if (cell.type === 'entry') {
         return new Entry(cell.horizontal, cell.vertical)
       } else if (cell.type === 'white') {
         return new WhiteCell()
       }
+      return null
     })
   })
 }
