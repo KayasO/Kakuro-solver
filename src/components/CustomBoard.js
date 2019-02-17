@@ -68,7 +68,6 @@ class CustomBoard extends Component {
 
   start = () => {
     const board = mapToBoardArray(this.state.board)
-    console.log(board)
     this.props.changeDifficulty(() => board)
     this.props.history.push('/game')
   }
