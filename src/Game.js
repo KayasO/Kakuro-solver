@@ -47,7 +47,12 @@ class Game extends Component {
           <Route
             exact
             path="/custom"
-            render={props => <CustomBoard {...props} />}
+            render={props => (
+              <CustomBoard
+                {...props}
+                changeDifficulty={this.changeDifficulty}
+              />
+            )}
           />
         </Switch>
       </Fragment>

@@ -35,6 +35,7 @@ class MainWindow extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     const { difficulty } = this.props
     const boardSetup = difficulty()
     const checkSetup = difficulty()

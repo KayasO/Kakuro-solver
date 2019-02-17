@@ -77,3 +77,17 @@ export function mapToSimpleList(input) {
   }
   return list
 }
+
+export function mapToBoardArray(input) {
+  return input.map(row => {
+    return row.map(cell => {
+      if (cell.type === 'empty') {
+        return null
+      } else if (cell.type === 'entry') {
+        return new Entry(cell.horizontal, cell.vertical)
+      } else if (cell.type === 'white') {
+        return new WhiteCell()
+      }
+    })
+  })
+}
