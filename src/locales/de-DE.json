@@ -5,7 +5,8 @@
     "startMenu": "Start Menü",
     "gameFinished": "Spiel beendet",
     "custom": "Eigenes Spielfeld",
-    "size": "Größe"
+    "size": "Größe",
+    "error": "Spielfeld ist nicht lösbar!"
   },
   "buttons": {
     "check": "Prüfe",

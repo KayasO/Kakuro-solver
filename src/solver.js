@@ -344,10 +344,14 @@ export default fieldAsLists => {
     stuckCounter = 0
     lastIteration = setFirstIteration()
     while (stuckCounter < 2) {
-      updateNotesWithSets()
-      updateEntries()
-      calcUnionOfWhiteCellsInEntry()
-      checkPossibleSolutions()
+      try {
+        updateNotesWithSets()
+        updateEntries()
+        calcUnionOfWhiteCellsInEntry()
+        checkPossibleSolutions()
+      } catch (e) {
+        throw 'Exception'
+      }
 
       if (isStuck(lastIteration)) {
         if (solutionsCopy.length === 0) {
@@ -357,7 +361,11 @@ export default fieldAsLists => {
           solutionEventsCopy = save.solutionEventsCopy
         }
 
-        guessNumber()
+        try {
+          guessNumber()
+        } catch (e) {
+          throw 'Exception'
+        }
         stuckCounter++
       } else {
         stuckCounter = 0

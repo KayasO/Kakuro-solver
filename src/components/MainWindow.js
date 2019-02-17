@@ -171,7 +171,7 @@ class MainWindow extends Component {
       <Fragment>
         <Grid container>
           <Grid item xs={6}>
-            <Grid container spacing="16">
+            <Grid container spacing={16}>
               <Grid item xs={6}>
                 <Typography variant="h4" gutterBottom>
                   {t('general.kakuro')}

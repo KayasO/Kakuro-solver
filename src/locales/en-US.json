@@ -5,7 +5,8 @@
     "startMenu": "Start Menu",
     "gameFinished": "Game finished",
     "custom": "Custom board",
-    "size": "Size"
+    "size": "Size",
+    "error": "Board is not solveable!"
   },
   "buttons": {
     "check": "Check",

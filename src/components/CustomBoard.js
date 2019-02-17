@@ -18,7 +18,8 @@ import { withStyles } from '@material-ui/core/styles'
 import HomeIcon from '@material-ui/icons/Home'
 import CellTypePicker from './CellTypePicker'
 
-import { mapToBoardArray } from '../mapper'
+import { mapToLists, mapToBoardArray } from '../mapper'
+import solve from '../solver'
 
 const styles = theme => ({
   table: {
@@ -39,10 +40,14 @@ const styles = theme => ({
     backgroundColor: `${green[500]}`,
     color: 'white',
   },
+  error: {
+    color: 'red',
+  },
 })
 
 class CustomBoard extends Component {
   state = {
+    error: false,
     board: null,
     size: '',
   }
@@ -92,14 +97,20 @@ class CustomBoard extends Component {
   }
 
   start = () => {
-    const board = mapToBoardArray(this.state.board)
-    this.props.changeDifficulty(() => board)
-    this.props.history.push('/game')
+    try {
+      solve(mapToLists(mapToBoardArray(this.state.board)))
+      this.props.changeDifficulty(() => mapToBoardArray(this.state.board))
+      this.props.history.push('/game')
+    } catch (e) {
+      this.setState({
+        error: true,
+      })
+    }
   }
 
   render() {
     const { classes, t } = this.props
-    const { board, size } = this.state
+    const { error, board, size } = this.state
 
     return (
       <Grid container>
@@ -133,12 +144,21 @@ class CustomBoard extends Component {
               <MenuItem value={4}>4x4</MenuItem>
               <MenuItem value={5}>5x5</MenuItem>
               <MenuItem value={6}>6x6</MenuItem>
+              <MenuItem value={7}>7x7</MenuItem>
             </Select>
           </FormControl>
         </Grid>
 
         {board && (
           <Grid item container>
+            {error && (
+              <Grid item>
+                <Typography className={classes.error} variant="h6">
+                  {t('general.error')}
+                </Typography>
+              </Grid>
+            )}
+
             <Grid item xs={12}>
               <Table className={classes.table} padding="dense">
                 <TableBody>
