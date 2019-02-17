@@ -3,13 +3,16 @@
     "kakuro": "Kakuro",
     "explanationList": "Explanation List",
     "startMenu": "Start Menu",
-    "gameFinished": "Game finished"
+    "gameFinished": "Game finished",
+    "custom": "Custom board"
   },
   "buttons": {
     "check": "Check",
     "menu": "Menu",
     "solution": "Solution",
     "ok": "Ok",
+    "back": "Back",
+    "start": "Start",
     "next": "Next",
     "prev": "Prev"
   },

@@ -40,7 +40,7 @@ class StartMenu extends Component {
     return (
       <Grid container direction="column" alignItems="center" spacing="40">
         <Grid item>
-          <Typography variant="h4">{t('general.startMenu')}</Typography>
+          <Typography variant="h4">{t('general.custom')}</Typography>
         </Grid>
 
         <Grid item>

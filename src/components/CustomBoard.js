@@ -1,12 +1,14 @@
-import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
 import {
   Button,
+  Grid,
   Table,
   TableBody,
   TableRow,
   TableCell,
+  Typography,
 } from '@material-ui/core'
+import { withNamespaces } from 'react-i18next'
 import { withStyles } from '@material-ui/core/styles'
 import CellTypePicker from './CellTypePicker'
 
@@ -16,6 +18,8 @@ const styles = theme => ({
   table: {
     width: '250px',
     height: '250px',
+    marginTop: '25px',
+    marginBottom: '25px',
     border: '5px solid',
   },
   tableCell: {
@@ -73,40 +77,59 @@ class CustomBoard extends Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, t } = this.props
 
     return (
-      <Fragment>
-        <Link to="/">Back</Link>
-        <Table className={classes.table} padding="dense">
-          <TableBody>
-            {Array(5)
-              .fill('')
-              .map((item, i) => {
-                return (
-                  <TableRow>
-                    {Array(5)
-                      .fill('')
-                      .map((item, j) => {
-                        return (
-                          <TableCell className={classes.tableCell}>
-                            <CellTypePicker
-                              handleFieldChange={this.handleFieldChange(i, j)}
-                            />
-                          </TableCell>
-                        )
-                      })}
-                  </TableRow>
-                )
-              })}
-          </TableBody>
-        </Table>
-        <Button variant="contained" color="secondary" onClick={this.start}>
-          Start
-        </Button>
-      </Fragment>
+      <Grid container>
+        <Grid item xs={12}>
+          <Typography variant="h4">{t('general.custom')}</Typography>
+        </Grid>
+
+        <Grid item>
+          <Table className={classes.table} padding="dense">
+            <TableBody>
+              {Array(5)
+                .fill('')
+                .map((item, i) => {
+                  return (
+                    <TableRow>
+                      {Array(5)
+                        .fill('')
+                        .map((item, j) => {
+                          return (
+                            <TableCell className={classes.tableCell}>
+                              <CellTypePicker
+                                handleFieldChange={this.handleFieldChange(i, j)}
+                              />
+                            </TableCell>
+                          )
+                        })}
+                    </TableRow>
+                  )
+                })}
+            </TableBody>
+          </Table>
+        </Grid>
+
+        <Grid item container xs={6} justify="center" spacing={16}>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => this.props.history.push('/')}
+            >
+              {t('buttons.back')}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary" onClick={this.start}>
+              {t('buttons.start')}
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
     )
   }
 }
 
-export default withStyles(styles)(CustomBoard)
+export default withStyles(styles)(withNamespaces()(CustomBoard))

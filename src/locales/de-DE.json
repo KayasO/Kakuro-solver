@@ -3,13 +3,16 @@
     "kakuro": "Kakuro",
     "explanationList": "Liste der Lösungen",
     "startMenu": "Start Menü",
-    "gameFinished": "Spiel beendet"
+    "gameFinished": "Spiel beendet",
+    "custom": "Eigenes Spielfeld"
   },
   "buttons": {
     "check": "Prüfe",
     "menu": "Menü",
     "solution": "Lösung",
     "ok": "Ok",
+    "back": "Zurück",
+    "start": "Start",
     "next": "Weiter",
     "prev": "Zurück"
   },
