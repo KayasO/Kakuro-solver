@@ -11,6 +11,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  TextField,
   Typography,
 } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
@@ -49,17 +50,8 @@ class CustomBoard extends Component {
   state = {
     error: false,
     board: null,
-    size: '',
-  }
-
-  setupBoard = event => {
-    const size = event.target.value
-    this.setState({
-      board: Array(size).fill(
-        Array(size).fill({ type: 'empty', horizontal: '0', vertical: '0' })
-      ),
-      size,
-    })
+    row: '',
+    col: '',
   }
 
   handleFieldChange = (row, col) => (event, name) => {
@@ -96,6 +88,32 @@ class CustomBoard extends Component {
     })
   }
 
+  handleRowChange = event => {
+    this.setState({
+      board: Array(+event.target.value).fill(
+        Array(+this.state.col).fill({
+          type: 'empty',
+          horizontal: '0',
+          vertical: '0',
+        })
+      ),
+      row: +event.target.value,
+    })
+  }
+
+  handleColChange = event => {
+    this.setState({
+      board: Array(+this.state.row).fill(
+        Array(+event.target.value).fill({
+          type: 'empty',
+          horizontal: '0',
+          vertical: '0',
+        })
+      ),
+      col: +event.target.value,
+    })
+  }
+
   start = () => {
     try {
       solve(mapToLists(mapToBoardArray(this.state.board)))
@@ -110,7 +128,7 @@ class CustomBoard extends Component {
 
   render() {
     const { classes, t } = this.props
-    const { error, board, size } = this.state
+    const { error, board } = this.state
 
     return (
       <Grid container>
@@ -129,24 +147,23 @@ class CustomBoard extends Component {
           </Button>
         </Grid>
 
-        <Grid item>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="size-simple">{t('general.size')}</InputLabel>
-            <Select
-              value={size}
-              onChange={this.setupBoard}
-              inputProps={{
-                name: 'size',
-                id: 'size-simple',
-              }}
-            >
-              <MenuItem value={3}>3x3</MenuItem>
-              <MenuItem value={4}>4x4</MenuItem>
-              <MenuItem value={5}>5x5</MenuItem>
-              <MenuItem value={6}>6x6</MenuItem>
-              <MenuItem value={7}>7x7</MenuItem>
-            </Select>
-          </FormControl>
+        <Grid item xs={12}>
+          <TextField
+            id="row"
+            label="Row"
+            value={this.state.row}
+            onChange={this.handleRowChange}
+            margin="normal"
+            variant="outlined"
+          />
+          <TextField
+            id="col"
+            label="Col"
+            value={this.state.col}
+            onChange={this.handleColChange}
+            margin="normal"
+            variant="outlined"
+          />
         </Grid>
 
         {board && (
@@ -162,28 +179,21 @@ class CustomBoard extends Component {
             <Grid item xs={12}>
               <Table className={classes.table} padding="dense">
                 <TableBody>
-                  {Array(size)
-                    .fill('')
-                    .map((item, i) => {
-                      return (
-                        <TableRow>
-                          {Array(size)
-                            .fill('')
-                            .map((item, j) => {
-                              return (
-                                <TableCell className={classes.tableCell}>
-                                  <CellTypePicker
-                                    handleFieldChange={this.handleFieldChange(
-                                      i,
-                                      j
-                                    )}
-                                  />
-                                </TableCell>
-                              )
-                            })}
-                        </TableRow>
-                      )
-                    })}
+                  {board.map((row, i) => {
+                    return (
+                      <TableRow>
+                        {row.map((cell, j) => {
+                          return (
+                            <TableCell className={classes.tableCell}>
+                              <CellTypePicker
+                                handleFieldChange={this.handleFieldChange(i, j)}
+                              />
+                            </TableCell>
+                          )
+                        })}
+                      </TableRow>
+                    )
+                  })}
                 </TableBody>
               </Table>
             </Grid>
