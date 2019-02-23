@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import { withNamespaces } from 'react-i18next'
 import {
   Button,
-  InputLabel,
   Grid,
-  FormControl,
-  MenuItem,
-  Select,
   Table,
   TableBody,
   TableRow,
